@@ -1,0 +1,172 @@
+<div class="page__wrapper">
+  <div class="main-slider">
+    <div class="main-slider__container swiper-container">
+      <div class="main-slider__wrapper swiper-wrapper">
+        <% @slides.each do |slide| %>
+          <div class="main-slider__item swiper-slide">
+            <div class="hero-section" style="background-image: url(<%= image_path('https://erp.ztta.kg' + slide.image_url.to_s) %>)">
+            <!--div class="hero-section"-->
+              <div class="hero-section__wrapper">
+                <div class="hero-section__inner">
+                  <div class="hero-section__content">
+                    <h1 class="hero-section__title"><%= slide.title %></h1>
+                    <div class="hero-section__text"><%= slide.content.html_safe %></div>
+                    <% if slide.button? %>
+                      <div class="hero-section__button">
+                        <a class="button button_icon button_color_blue button_size_extra-large button_style_gradient button_style_solid button_style_rounded" href=<%= slide.video_link %> target="blank">
+                          <svg class="icon icon_video" role="img">
+                            <title>video</title>
+                            <use xlink:href="<%= asset_path 'icons.svg#video' %>"></use>
+                          </svg>
+                          <span>Видео о заводе</span>
+                        </a>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <button class="main-slider__button main-slider__button_prev" type="button">
+        <span class="visuallyhidden">Предыдущий слайд</span>
+      </button>
+      <button class="main-slider__button main-slider__button_next" type="button">
+        <span class="visuallyhidden">Следующий слайд</span>
+      </button>
+      <div class="main-slider__scroll-icon">
+        <button class="scroll-notifer" type="button"></button>
+      </div>
+    </div>
+  </div>
+  <div class="page__section">
+    <h2 class="section-title section-title_main">Продукция и услуги</h2>
+    <div class="services-section">
+      <div class="services-section__inner">
+        <div class="tabs tabs_vertical" data-tabs-name="details">
+          <span class="tabs__description visuallyhidden" data-tabs-description="data-tabs-description">Use left and right arrows to navigate between tabs.</span>
+          <div class="tabs__head">
+            <% @services.each do |service| %>
+              <button class="tabs__tab" type="button" data-tab-id="<%= service.id %>">
+                <span class="tabs__icon">
+                  <%= image_tag('https://erp.ztta.kg' + service.svg_url.to_s) %>
+                </span>
+                <span class="tabs__title"><%= service.title %></span>
+              </button>
+            <% end %>
+          </div>
+          <div class="tabs__body">
+            <% @services.each do |service| %>
+              <div class="tabs__panel" data-panel-id="<%= service.id %>">
+                <div class="service-info">
+                  <div class="service-info__img">
+                    <%= image_tag('https://erp.ztta.kg' + service.cover_url.to_s) %>
+                  </div>
+                  <div class="service-info__content">
+                    <%= truncate_html(service.description.html_safe, length: 500) %>
+                    <div class="service-info__button">
+                      <a class="button button_color_blue button_size_medium button_style_ghost button_style_rounded" href="<%= service_path(service) %>">Читать полностью…</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <div class="tabs__preloader" data-tabs-preloader="data-tabs-preloader"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page__section page__section_gray">
+    <h2 class="section-title section-title_main">Размещение заказа на резку металла</h2>
+    <div class="detail-links">
+      <div class="detail-links__inner">
+        <div class="detail-links__item">
+          <div class="detail-links-item">
+            <div class="detail-links-item__img">
+              <img src="<%= asset_path 'detail-links__sketch.svg' %>" alt="img">
+            </div>
+            <h3 class="detail-links-item__title">Конструктор типовых деталей:</h3>
+            <div class="detail-links-item__text">Здесь вы можете создать типовые детали самостоятельно. Достаточно просто выбрать форму детали и разместить необходимые отверстия.</div>
+            <div class="detail-links-item__button">
+              <a class="button button_block button_color_blue button_size_large button_style_ghost button_style_rounded" href="/constructor">Создать деталь</a>
+            </div>
+          </div>
+        </div>
+        <div class="detail-links__item">
+          <div class="detail-links-item">
+            <div class="detail-links-item__img">
+              <img src="<%= asset_path 'detail-links__upload.svg' %>" alt="img">
+            </div>
+            <h3 class="detail-links-item__title">Загрузка нетиповых деталей:</h3>
+            <div class="detail-links-item__text">Здесь вы можете загрузить на оценку ваши эскизы или чертежи и в течении часа мы свяжемся с вами.</div>
+            <div class="detail-links-item__button">
+              <a class="button button_block button_color_blue button_size_large button_style_ghost button_style_rounded" href="/constructor/attachment">Загрузить чертеж</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page__section page__section_about">
+    <div class="about-section">
+      <div class="about-section__inner">
+        <h2 class="about-section__title"><%= @about_us.title if @about_us %></h2>
+        <div class="about-section__content">
+          <div class="about-section__left">
+            <div class="about-section__text">
+              <div class="about-section__item">
+                <%= truncate_html(@about_us.content.html_safe, length: 500) if @about_us %>
+              </div>
+            </div>
+            <div class="about-section__button">
+              <a class="button button_color_blue button_size_extra-large button_style_solid button_style_rounded" href="<%= about_us_path %>">Подробнее о нас</a>
+            </div>
+          </div>
+          <div class="about-section__right">
+            <div class="about-section__img">
+              <%= image_tag('https://erp.ztta.kg' + @about_us.image_url.to_s) if @about_us %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page__section page__section_shop">
+    <div class="shop-link">
+      <div class="shop-link__inner">
+        <div class="shop-link__img">
+          <img src="<%= asset_path 'shop-link__car.png' %>" alt="slide-img" srcset="<% image_tag '/shop-link__car.png 1x, /shop-link__car@2x.png 2x' %>">
+        </div>
+        <div class="shop-link__content">
+          <h2 class="shop-link__title">Нашу продукцию вы можете приобрести в сети торговых точек "Стройдвор"</h2>
+          <div class="shop-link__img shop-link__img_sidebar">
+            <img src="<%= asset_path 'shop-link__car.png' %>" alt="slide-img" srcset="<% image_tag '/shop-link__car.png 1x, /shop-link__car@2x.png 2x' %>">
+          </div>
+          <div class="shop-link__button">
+            <a class="button button_block button_color_blue button_size_extra-large button_style_solid button_style_rounded" href="http://stroydvor.kg/" target="_blank">Перейти в магазин</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contacts-section">
+    <a class="dg-widget-link" href="http://2gis.kg/bishkek/firm/70000001028254247/center/74.63802337646486,42.87483190700575/zoom/14?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте Бишкека</a>
+    <div class="dg-widget-link">
+      <a href="http://2gis.kg/bishkek/center/74.662567,42.870105/zoom/16/routeTab/rsType/bus/to/74.662567,42.870105╎Завод Темир Тулпар Азия, ОсОО?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">
+        Найти проезд до Завод Темир Тулпар Азия, ОсОО
+      </a>
+    </div>
+    <script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script>
+    <script charset="utf-8">
+      new DGWidgetLoader({"width":"100%","height":"100%","borderColor":"#a3a3a3","pos":{"lat":42.87483190700575,"lon":74.63802337646486,"zoom":14},"opt":{"city":"bishkek"},"org":[{"id":"70000001028254247"}]});
+    </script>
+    <div class="contacts-section__info">
+      <div class="contacts-info">
+        <h3 class="contacts-info__title">Наши контакты</h3>
+        <%= render partial: 'shared/contacts' %>
+      </div>
+    </div>
+  </div>
+</div>

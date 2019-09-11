@@ -1,0 +1,10 @@
+$("#draft-download").html("<%= escape_javascript(render partial: 'attachment') %>");
+
+if ("<%= @error_message %>") {
+  notificationBoard.show("<%= @error_message %>", {className: "notification_type_warning"});
+} else if ("<%= @message %>") {
+  $('form')[0].reset();
+  $('.file__label').text('');
+  $(window).scrollTop($('#draft-download').offset().top);
+  notificationBoard.show("<%= @message %>", {className: "notification_type_success"});
+};

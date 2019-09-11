@@ -1,0 +1,100 @@
+<div class="page__content page__content_grey">
+  <div class="page__wrapper">
+    <div class="page__top">
+      <div class="page__inner">
+        <div class="bread-crumbs">
+          <ul class="bread-crumbs__list">
+            <li class="bread-crumbs__item">
+              <a class="bread-crumbs__link" href="<%= root_path %>">Главная</a>
+              <div class="bread-crumbs__separator">
+                <svg class="icon icon_arrow-right" role="img">
+                  <title>separator</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+                </svg>
+              </div>
+            </li>
+            <li class="bread-crumbs__item">Правила оплаты картой</li>
+          </ul>
+        </div>
+        <h1 class="page-title">Правила оплаты картой</h1>
+      </div>
+    </div>
+    <div class="page__main">
+      <div class="page__inner page__inner_flex page__inner_reversed">
+        <%= render partial: 'shared/sidebar' %>
+        <div class="page__content-col">
+          <div class="payment-rules">
+            <div class="payment-rules__text">Мы хотим, чтобы оплата банковскими картами для наших клиентов была простой
+              и понятной. С этой целью мы подготовили документ с детальной информацией о шагах оплаты, а также его
+              упрощенный вариант в виде легко запоминающейся картинки.
+            </div>
+            <div
+            class="payment-rules__inner">
+              <h2 class="payment-rules__title">Введите необходимую информацию
+                <br> для оплаты банковской картой:</h2>
+              <div class="payment-rules__list">
+                <div class="payment-rules__section">
+                  <h3 class="payment-rules__section-title">1. Номер карты:</h3>
+                  <div class="payment-rules__item">
+                    <div class="payment-rules__img">
+                      <img src="<%= asset_path 'payment-rules__img-1.png' %>" alt="img" srcset="
+                        <% image_tag '/payment-rules__img-1.png 1x, /payment-rules__img-1@2x.png 2x' %>">
+                    </div>
+                    <div class="payment-rules__content">
+                      <b>Номер карты</b> находится на лицевой стороне банковской карты (от 12 до 19 символов)
+                    </div>
+                  </div>
+                </div>
+                <div class="payment-rules__section">
+                  <h3 class="payment-rules__section-title">2. Срок действия карты:</h3>
+                  <div class="payment-rules__item">
+                    <div class="payment-rules__img">
+                      <img src="<%= asset_path 'payment-rules__img-2.png' %>" alt="img" srcset="
+                        <% image_tag '/payment-rules__img-2.png 1x, /payment-rules__img-2@2x.png 2x' %>">
+                    </div>
+                    <div class="payment-rules__content">
+                      <b>Срок действия карты</b> находится на лицевой стороне банковской карты (4 цифры: мм/гг)
+                    </div>
+                  </div>
+                </div>
+                <div class="payment-rules__section">
+                  <h3 class="payment-rules__section-title">3. Ваше имя:</h3>
+                  <div class="payment-rules__item">
+                    <div class="payment-rules__img">
+                      <img src="<%= asset_path 'payment-rules__img-3.png' %>" alt="img" srcset="
+                        <% image_tag '/payment-rules__img-3.png 1x, /payment-rules__img-3@2x.png 2x' %>">
+                    </div>
+                    <div class="payment-rules__content">
+                      <b>Ваше имя</b> указано на лицевой стороне банковской карты (Самый нижний блок слева)
+                    </div>
+                  </div>
+                </div>
+                <div class="payment-rules__section">
+                  <h3 class="payment-rules__section-title">4. CCV/CVC2 код:</h3>
+                  <div class="payment-rules__item">
+                    <div class="payment-rules__img">
+                      <img src="<%= asset_path 'payment-rules__img-4.png' %>" alt="img" srcset="
+                        <% image_tag '/payment-rules__img-4.png 1x, /payment-rules__img-4@2x.png 2x' %>">
+                    </div>
+                    <div class="payment-rules__content">
+                      <b>CCV/CVC2</b> код находится на обратной стороне банковской карты (3 цифры, крайние справа)
+                    </div>
+                  </div>
+                </div>
+                <div class="payment-rules__section">
+                  <h3 class="payment-rules__section-title">5. Нажмите кнопку «Оплатить»:</h3>
+                  <div class="payment-rules__item">
+                    <div class="payment-rules__img">
+                      <img src="<%= asset_path 'payment-rules__img-5.png' %>" alt="img" srcset="
+                        <% image_tag '/payment-rules__img-5.png 1x, /payment-rules__img-5@2x.png 2x' %>">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

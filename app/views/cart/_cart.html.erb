@@ -1,0 +1,159 @@
+<% cart_items.each do |cart_item| %>
+  <div class="detail-cards-list__item">
+    <div class="detail-card-item" id="detail-card-item-<%= cart_item.id %>">
+      <div data-accordion-item class="detail-card-item__wrapper">
+        <div class="detail-card-item__inner">
+          <button class="button detail-card-item__trigger" type="button" data-accordion-trigger="data-accordion-trigger">
+            <svg class="icon icon_arrow-down detail-card-item__trigger-arrow" role="img">
+              <title>trigger-icon</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-down' %>"></use>
+            </svg>
+          </button>
+          <div class="detail-card-item__info">
+            <div class="detail-card-item__info-item">
+              <% if cart_item.load_type == 'constructor' %>
+                <div class="detail-card-item__info-label">Конструктор деталей</div>
+                <div class="detail-card-item__info-text" title="<%= cart_item.name %>"><%= cart_item.name %></div>
+              <% else %>
+                  <div class="detail-card-item__info-label">Загруженная деталь</div>
+                  <div class="detail-card-item__info-text" title="<%= cart_item.name %>"><%= cart_item.name %></div>
+              <% end %>
+            </div>
+            <div class="detail-card-item__info-item">
+              <div class="detail-card-item__info-label">ID детали</div>
+              <div class="detail-card-item__info-text" title="<%= pretty_id(cart_item.id) %>"><%= pretty_id(cart_item.id) %></div>
+            </div>
+          </div>
+          <div class="detail-card-item__quantity" id="detail-<%= cart_item.id %>-card-item__quantity">
+            <div class="quantity-counter">
+              <input class="quantity-counter__input" id="card-item-<%= cart_item.id %>__quantity" type="number" min="1" value="<%= cart_item.count %>">
+            </div>
+          </div>
+          <div class="detail-card-item__other">
+            <div class="detail-card-item__price">
+              <div class="detail-card-item__info-label">Цена:</div>
+              <div class="detail-card-item__info-text">
+                <span id="item-price-<%= cart_item.id %>"><%= cart_item.price %> сом</span>
+                <button class="button-link" id="item-price-refresh-<%= cart_item.id %>" style="display: none;">Обновить цену</button>
+              </div>
+            </div>
+            <div class="detail-card-item__controls">
+              <button class="button detail-card-item__controls-item" id="delete-item-<%= cart_item.id %>" type="button">
+                <svg class="icon icon_hole-items_delete detail-card-item__controls-icon detail-card-item__controls-icon_delete" role="img">
+                  <title>delete</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#hole-items_delete' %>"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="detail-card-item__pannel">
+          <div class="detail-card-item__draft">
+            <%== cart_item.svg %>
+            <img src="<%= asset_path 'content/draft.png' %>" alt="draft">
+            <button class="detail-card-item__draft-zoom" type="button" data-micromodal-trigger="modal<%= cart_item.id %>">
+              <svg class="icon icon_zoom" role="img">
+                <title>zoom</title>
+                <use xlink:href="<%= asset_path 'icons.svg#zoom' %>"></use>
+              </svg>
+            </button>
+          </div>
+          <div class="detail-card-item__pannel-info">
+            <div class="detail-card-item__pannel-item">
+              <div class="detail-card-item__info-label">Материал детали:</div>
+              <div class="detail-card-item__info-text"><%= "#{cart_item.material_name} #{cart_item.material_thickness} мм" %></div>
+            </div>
+            <div class="detail-card-item__pannel-item">
+              <div class="detail-card-item__info-label">Тип резки:</div>
+              <div class="detail-card-item__info-text"><%= cart_item.cut_name %></div>
+            </div>
+            <div class="detail-card-item__pannel-item">
+              <div class="detail-card-item__info-label">Длина - Ширина:</div>
+              <div class="detail-card-item__info-text"><%= cart_item.width %> - <%= cart_item.height %> мм.</div>
+            </div>
+            <div class="detail-card-item__pannel-item">
+              <div class="detail-card-item__info-label">Масса 1 детали:</div>
+              <div class="detail-card-item__info-text"><%= cart_item.mass %> г.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal modal_animation_slide" id="modal<%= cart_item.id %>" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close="data-micromodal-close">
+      <div class="modal__container">
+        <div class="dialog" id="dialog1" role="dialog" aria-modal="true" aria-labelledby="dialog1-dialog__title">
+          <header class="dialog__header">
+            <h2 class="dialog__title" id="dialog1-dialog__title"><%= cart_item.name %></h2>
+            <button class="dialog__close" type="button" data-micromodal-close="data-micromodal-close">
+              <svg class="icon icon_close" role="img" data-micromodal-close="data-micromodal-close">
+                <title>Close</title>
+                <use xlink:href="<%= asset_path 'icons.svg#close' %>"></use>
+              </svg>
+              <span class="visuallyhidden">Close this dialog window</span>
+            </button>
+          </header>
+          <main class="dialog__content">
+            <div class="ta-center padding-bottom-20">
+              <% unless cart_item.load_type == 'custom'  %>
+                Длина: <%= cart_item.height %> /
+                Ширина: <%= cart_item.width %>
+              <% end %>
+            </div>
+            <div class="modal-draft-view">
+              <div class="modal-draft-view__wrapper">
+                <%== cart_item.svg %>
+              </div>
+            </div>
+            <%= link_to 'Скачать', cart_path(cart_item, format: :svg), class: "button button_color_blue button_size_small button_style_solid button_style_rounded ta-center m-top-20" %>
+
+          </main>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    if (parseInt("<%= cart_items.sum(:price).to_i %>") > parseInt("<%= Constant.first.min_order_sum %>")) {
+      $('.page__top-message').hide();
+    } else {
+      $('.page__top-message').show();
+    }
+
+    $(document).ready(function(){
+      $("#delete-item-<%= cart_item.id %>").click(function(){
+        $.ajax({
+          url: "<%= cart_path(cart_item.id) %>" ,
+          type: "delete",
+          data: { authenticity_token: "<%= session[:_csrf_token] %>" },
+          success: function () {
+            location.href = "/cart";
+            App.Accordion(".detail-card-item");
+          }
+        });
+      });
+
+      $("#item-price-refresh-<%= cart_item.id %>").click(function(){
+        $.ajax({
+          url: "<%= update_price_cart_path(cart_item.id) %>",
+          type: "post",
+          data: {
+            authenticity_token: "<%= session[:_csrf_token] %>",
+            quantity: document.getElementById("card-item-<%= cart_item.id %>__quantity").value
+          },
+          success: function () {
+              App.Accordion(".detail-card-item");
+          }
+        });
+      });
+
+      $("#detail-<%= cart_item.id %>-card-item__quantity").change(function(){
+        $('#item-price-<%= cart_item.id %>').hide()
+        $('#item-price-refresh-<%= cart_item.id %>').show();
+      });
+    });
+  </script>
+<% end %>

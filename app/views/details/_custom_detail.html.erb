@@ -1,0 +1,101 @@
+<div class="detail-cards-list__item">
+  <div class="detail-card-item">
+    <div data-accordion-item class="detail-card-item__wrapper">
+      <div class="detail-card-item__inner">
+        <button class="button detail-card-item__trigger" type="button" data-accordion-trigger="data-accordion-trigger">
+          <svg class="icon icon_arrow-down detail-card-item__trigger-arrow" role="img">
+            <title>trigger-icon</title>
+            <use xlink:href="<%= asset_path 'icons.svg#arrow-down' %>"></use>
+          </svg>
+        </button>
+        <div class="detail-card-item__info">
+          <div class="detail-card-item__info-item">
+            <div class="detail-card-item__info-label">Загруженная деталь</div>
+            <div class="detail-card-item__info-text" title="<%= detail.name %>"><%= detail.name %></div>
+          </div>
+          <div class="dπetail-card-item__info-item">
+            <div class="detail-card-item__info-label">Дата загрузки</div>
+            <div class="detail-card-item__info-text" title="<%= convert_date(detail.created_at) %>"><%= convert_date(detail.created_at) %></div>
+          </div>
+        </div>
+        <div class="detail-card-item__other">
+          <% if detail.status != 'appraised' %>
+            <div class="detail-card-item__status">
+              <div class="detail-card-item__info-label">Статус оценки</div>
+              <div class="detail-card-item__info-text detail-card-item__info-text_<%= detail_status_color(detail.status) %>"><%= detail_status(detail.status) %></div>
+            </div>
+          <% end %>
+          <% if detail.status == 'appraised' %>
+            <div class="detail-card-item__quantity" id="detail-<%= detail.id %>-card-item__quantity">
+              <div class="quantity-counter">
+                <input class="quantity-counter__input" id="detail-quantity-<%= detail.id %>" type="number" value="<%= detail.count %>" min="1">
+              </div>
+            </div>
+            <div class="detail-card-item__show-price" id="detail-card-item__show-price-<%= detail.id %>">
+              <button class="button button_block button_color_blue button_size_normal button_style_solid button_style_rounded" id="show-price-<%= detail.id %>" type="button">Показать
+                стоимость
+              </button>
+            </div>
+            <div class="detail-card-item__price" id="detail-<%= detail.id %>-card-item__price" style="display: none;">
+              <div class="detail-card-item__info-label">Цена:</div>
+              <div class="detail-card-item__info-text">
+                <span id="detail-price-<%= detail.id %>"><%= detail.price.to_i %> сом</span>
+                <a href="#" id="detail-price-refresh-<%= detail.id %>" style="display: none;">Обновить цену</a>
+              </div>
+            </div>
+            <div class="detail-card-item__cart-button" id="detail-<%= detail.id %>-card-item__cart-button" style="display: none;">
+              <button class="button button_block button_color_green button_size_normal button_style_ghost button_style_rounded" id="add_to_cart_<%= detail.id %>" type="button">В
+                корзину
+              </button>
+            </div>
+          <% end %>
+          <div class="detail-card-item__controls">
+            <button class="button detail-card-item__controls-item" type="button">
+              <svg class="icon icon_hole-items_delete detail-card-item__controls-icon detail-card-item__controls-icon_delete" id="delete_detail_<%= detail.id %>" role="img">
+                <title>delete</title>
+                <use xlink:href="<%= asset_path 'icons.svg#hole-items_delete' %>"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="detail-card-item__pannel">
+        <% if detail.svg.present? %>
+          <div class="detail-card-item__draft">
+            <%== detail.svg %>
+            <button class="detail-card-item__draft-zoom" type="button" data-micromodal-trigger="modal<%= detail.id %>">
+              <svg class="icon icon_zoom" role="img">
+                <title>zoom</title>
+                <use xlink:href="<%= asset_path 'icons.svg#zoom' %>"></use>
+              </svg>
+            </button>
+          </div>
+        <% end %>
+        <div class="detail-card-item__pannel-info">
+          <div class="detail-card-item__pannel-item">
+            <div class="detail-card-item__info-label">Материал детали:</div>
+            <div class="detail-card-item__info-text"><%= material_title(detail.cut_material.material) %></div>
+          </div>
+          <div class="detail-card-item__pannel-item">
+            <div class="detail-card-item__info-label">Тип резки:</div>
+            <div class="detail-card-item__info-text"><%= detail.cut_material.cut.name %></div>
+          </div>
+          <div class="detail-card-item__pannel-item">
+            <div class="detail-card-item__info-label">Длина - Ширина:</div>
+            <div class="detail-card-item__info-text"><%= detail.width %> - <%= detail.height %> мм.</div>
+          </div>
+          <div class="detail-card-item__pannel-item">
+            <div class="detail-card-item__info-label">Количество:</div>
+            <div class="detail-card-item__info-text"><%= detail.count %> шт.</div>
+          </div>
+          <div class="detail-card-item__pannel-item">
+            <div class="detail-card-item__info-label">Загруженный файл:</div>
+            <div class="detail-card-item__info-text" title="<%= detail.attachment.file.filename if detail.attachment.file %>"><%= detail.attachment.file.filename if detail.attachment.file %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

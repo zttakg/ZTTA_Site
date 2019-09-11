@@ -1,0 +1,49 @@
+<div class="page__content page__content_grey">
+  <div class="page__wrapper">
+    <div class="page__main">
+      <div class="page__inner">
+        <div class="log-reg">
+          <img class="log-reg__logo" src="<%= asset_path 'logo.svg' %>" alt="logo">
+          <div class="log-reg__form">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="log-reg__form-top">
+                <h2 class="log-reg__title">Вход</h2>
+                <div class="form-item form__item">
+                  <div class="form-item__label">
+                    <label class="label" for="login__phone_number">Номер телефона:</label>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_inline input_style_default">
+                      <input class="form-control form-control_type_input input__control phone_input" id="login__phone_number" name="client[phone_number]" type="phone_number">
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item form__item">
+                  <div class="form-item__label">
+                    <label class="label" for="login__password">Пароль:</label>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_password input_inline input_style_default">
+                      <input class="form-control form-control_type_input input__control" id="login__password" name="client[password]" type="password">
+                    </span>
+                  </div>
+                </div>
+                <div class="form__submit">
+                  <%= f.submit 'Войти', class: 'button button_block button_color_blue button_size_large button_style_solid button_style_rounded'  %>
+                </div>
+                <div class="form__links">
+                  <%= link_to 'Восстановить пароль', password_auth_path, class: 'form__links-item' %>
+                </div>
+              </div>
+              <div class="log-reg__form-bottom">
+                <span>Вы еще не зарегистрированы?
+                  <a href="<%= new_registration_path(resource_name) %>">Зарегистрироваться</a>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

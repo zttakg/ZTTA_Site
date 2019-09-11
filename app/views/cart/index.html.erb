@@ -1,0 +1,49 @@
+<div class="page__top">
+  <div class="page__inner">
+    <div class="bread-crumbs">
+      <ul class="bread-crumbs__list">
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= root_path %>">Главная</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= cabinet_path %>">Личный кабинет</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">Моя корзина</li>
+      </ul>
+    </div>
+    <h1 class="page-title">Моя корзина</h1>
+  </div>
+</div>
+<div class="page__main">
+  <div class="page__inner">
+    <% if @cart_items.present? %>
+      <%= render 'message' if @cart_items_sum < Constant.first.min_order_sum %>
+      <div class="cart-total cart-total_top">
+        <%= render 'cart_total' %>
+      </div>
+      <div class="detail-cards-list">
+        <%= render 'cart', cart_items: @cart_items %>
+      </div>
+      <div class="cart-total cart-total_bottom">
+        <%= render 'cart_total' %>
+      </div>
+      <div class="pagination">
+        <%= render partial: 'shared/pagination', locals: { url: cart_index_path, collection: @cart_items } %>
+      </div>
+    <% else %>
+      <%= render 'empty' %>
+    <% end %>
+  </div>
+</div>

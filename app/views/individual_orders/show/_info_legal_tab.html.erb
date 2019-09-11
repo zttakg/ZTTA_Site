@@ -1,0 +1,80 @@
+<div class="order-delivery-info">
+  <div class="order-delivery-info__left">
+    <div class="order-delivery-info__section">
+      <h3 class="order-delivery-info__title">Контактное лицо</h3>
+      <div class="order-delivery-info__two-cols">
+        <div class="order-delivery-info__col">
+          <div class="order-delivery-info__col-item">
+            <div class="order-delivery-info__label">Фамилия:</div>
+            <div class="order-delivery-info__text"><%= individual_order.contact_person_last_name %></div>
+          </div>
+          <div class="order-delivery-info__col-item">
+            <div class="order-delivery-info__label">Номер телефона:</div>
+            <div class="order-delivery-info__text"><%= individual_order.contact_person_phone_number %></div>
+          </div>
+        </div>
+        <div class="order-delivery-info__col">
+          <div class="order-delivery-info__col-item">
+            <div class="order-delivery-info__label">Имя:</div>
+            <div class="order-delivery-info__text"><%= individual_order.contact_person_name %></div>
+          </div>
+          <div class="order-delivery-info__col-item">
+            <div class="order-delivery-info__label">Электронная почта:</div>
+            <div class="order-delivery-info__text"><%= individual_order.contact_person_email %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="order-delivery-info__section">
+      <h3 class="order-delivery-info__title">Реквизиты юридического лица</h3>
+      <div class="order-delivery-info__item">
+        <div class="order-delivery-info__label">Наименование организации:</div>
+        <div class="order-delivery-info__text"><%= individual_order.company_name %></div>
+      </div>
+      <div class="order-delivery-info__item">
+        <div class="order-delivery-info__label">ИНН:</div>
+        <div class="order-delivery-info__text"><%= individual_order.company_INN %></div>
+      </div>
+      <div class="order-delivery-info__item">
+        <div class="order-delivery-info__label">Юридический адрес:</div>
+        <div class="order-delivery-info__text"><%= individual_order.company_legal_address %></div>
+      </div>
+      <div class="order-delivery-info__item">
+        <div class="order-delivery-info__label">Фактический адрес:</div>
+        <div class="order-delivery-info__text"><%= individual_order.company_address %></div>
+      </div>
+      <div class="order-delivery-info__item">
+        <div class="order-delivery-info__label">Наименование банка:</div>
+        <div class="order-delivery-info__text"><%= individual_order.bank_name %></div>
+      </div>
+      <div class="order-delivery-info__item">
+        <div class="order-delivery-info__label">Город банка:</div>
+        <div class="order-delivery-info__text"><%= individual_order.bank_address %></div>
+      </div>
+      <div class="order-delivery-info__item">
+        <div class="order-delivery-info__label">БИК:</div>
+        <div class="order-delivery-info__text"><%= individual_order.company_BIC %></div>
+      </div>
+      <div class="order-delivery-info__item">
+        <div class="order-delivery-info__label">Расчетный счет:</div>
+        <div class="order-delivery-info__text"><%= individual_order.settlement_account %></div>
+      </div>
+      <div class="order-delivery-info__item">
+        <div class="order-delivery-info__label">Код ОКПО:</div>
+        <div class="order-delivery-info__text"><%= individual_order.company_OKPO %></div>
+      </div>
+    </div>
+
+    <%= render partial: 'individual_orders/show/delivery_method', locals: { individual_order: individual_order } %>
+
+    <div class="order-delivery-info__section">
+      <h3 class="order-delivery-info__title"></h3>
+      <div class="order-delivery-info__item">
+        <div class="order-delivery-info__label">Комментарий к заказу:</div>
+        <div class="order-delivery-info__text"><%= individual_order.comment %></div>
+      </div>
+    </div>
+  </div>
+
+  <%= render partial: 'individual_orders/show/order_history', locals: { order_histories: individual_order.order_histories} %>
+</div>

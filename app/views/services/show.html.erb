@@ -1,0 +1,42 @@
+<div class="page__content page__content_grey">
+  <div class="page__wrapper">
+    <div class="page__top">
+      <div class="page__inner">
+        <div class="bread-crumbs">
+          <ul class="bread-crumbs__list">
+            <li class="bread-crumbs__item">
+              <a class="bread-crumbs__link" href="<%= root_path %>">Главная</a>
+              <div class="bread-crumbs__separator">
+                <svg class="icon icon_arrow-right" role="img">
+                  <title>separator</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+                </svg>
+              </div>
+            </li>
+            <li class="bread-crumbs__item">
+              <a class="bread-crumbs__link" href="<%= services_path %>">Продукция и Услуги</a>
+              <div class="bread-crumbs__separator">
+                <svg class="icon icon_arrow-right" role="img">
+                  <title>separator</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+                </svg>
+              </div>
+            </li>
+            <li class="bread-crumbs__item"><%= @service.title %></li>
+          </ul>
+        </div>
+        <h1 class="page-title"><%= @service.title %></h1>
+      </div>
+    </div>
+    <div class="page__main">
+      <div class="page__inner page__inner_flex page__inner_reversed">
+        <%= render partial: 'shared/sidebar' %>
+        <div class="page__content-col">
+          <div class="services-full">
+            <%= @service.description.html_safe %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

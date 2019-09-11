@@ -1,0 +1,19 @@
+<div class="cart-total__left">
+  <div class="cart-total__text">Всего деталей:
+    <span class="items-count"><%= @cart_items_count %></span>
+  </div>
+</div>
+<div class="cart-total__right">
+  <div class="cart-total__text">Итого к оплате:
+    <span class="cart-total-price"><%= @total_payment %> сом</span>
+  </div>
+  <div class="cart-total__button">
+    <button class="button button_color_green button_size_large button_style_solid button_style_rounded button_style_uppercase button_style_letter-spacing" type="button">Оформить заказ</button>
+  </div>
+</div>
+
+<script>
+  $(".cart-total__button").click(function(){
+    window.location.href = "<%= new_individual_order_path %>";
+  });
+</script>

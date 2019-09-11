@@ -1,0 +1,9 @@
+if ("<%= @error_message %>") {
+  const notificationBoard = new App.Notification({
+    delay: 10000
+  });
+
+  notificationBoard.show("<%= @error_message %>", {
+    className: "notification_type_warning"
+  });
+};

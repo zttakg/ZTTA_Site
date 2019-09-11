@@ -1,0 +1,177 @@
+<div class="details-list__controls details-list__controls_top">
+  <%= render partial: 'individual_orders/show/list_controls' %>
+</div>
+
+<div class="details-list__list"  id="checkbox-container">
+  <% @individual_items.each do |individual_item| %>
+    <div class="details-list__item">
+      <div class="details-item">
+        <button class="button detail-card-item__trigger" type="button" data-accordion-trigger="data-accordion-trigger" id="accordeon-trigger-<%= individual_item.id %>">
+          <svg class="icon icon_arrow-down detail-card-item__trigger-arrow" role="img">
+            <title>trigger-icon</title>
+            <use xlink:href="<%= asset_path 'icons.svg#arrow-down' %>"></use>
+          </svg>
+        </button>
+        <div class="details-item__check">
+          <label class="checkbox checkbox_style_default" for="1">
+            <input class="form-control form-control_type_checkbox checkbox__control" id="<%= individual_item.id %>" name="1" type="checkbox">
+            <span class="checkbox__box"></span>
+            <span class="checkbox__label">&nbsp;</span>
+          </label>
+        </div>
+        <div class="details-item__draft">
+          <%== individual_item.svg %>
+          <img src="<%= asset_path 'content/draft.png' %>" alt="draft">
+          <button class="detail-card-item__draft-zoom" type="button" data-micromodal-trigger="modal<%= individual_item.id %>">
+            <svg class="icon icon_zoom" role="img">
+              <title>zoom</title>
+              <use xlink:href="<%= asset_path 'icons.svg#zoom' %>"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="details-item__info">
+          <div class="details-item__col details-item__col_name">
+          <% if individual_item.load_type == 'constructor' %>
+              <div class="details-detail-item__label">Конструктор деталей</div>
+          <% else %>
+              <div class="details-detail-item__label">Загруженная деталь</div>
+          <% end %>
+          <div class="details-item__text" title="<%= individual_item.name %>"><%= individual_item.name %></div>
+          </div>
+          <div class="details-item__col details-item__col_id">
+            <div class="details-item__label">ID детали</div>
+            <div class="details-item__text" title="<%= individual_item.id %>"><%= pretty_id(individual_item.id) %></div>
+          </div>
+          <div class="details-item__col details-item__col_quantity">
+            <div class="details-item__label">Количество:</div>
+            <div class="details-item__text" title="<%= individual_item.count %> шт."><%= individual_item.count %> шт.</div>
+          </div>
+          <div class="details-item__col details-item__col_get-price" id="get-price-<%= individual_item.id %>">
+            <div class="details-item__label">Цена:</div>
+            <div class="details-item__text" title="Получить цену" >
+              <button class="button-link" id="details-item-<%= individual_item.id %>">Получить цену</button>
+            </div>
+          </div>
+          <% if individual_item.constructor? %>
+            <div class="details-item__controls" id="edit-button-<%= individual_item.id %>">
+              <a style="" class="button detail-card-item__controls-item" href="/constructor#/order/<%= individual_item.id %>">
+                <svg class="icon icon_hole-items_edit details-item__controls-icon details-item__controls-icon_edit" role="img">
+                  <title>edit</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#hole-items_edit' %>"></use>
+                </svg>
+              </a>
+            </div>
+          <% end %>
+          <div class="details-item__col details-item__col_price" style="display: none;" id="col-price-<%= individual_item.id %>">
+            <div class="details-item__label">Цена:</div>
+            <div class="details-item__text">
+              <span id="item-price-<%= individual_item.id %>"></span>
+            </div>
+          </div>
+          <div class="details-item__col details-item__col_cart-button" style="display: none;" id="cart-button-<%= individual_item.id %>">
+            <div class="detail-card-item__cart-button">
+              <button class="button button_block button_color_green button_size_normal button_style_ghost button_style_rounded" type="button">В корзину</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-card-item__pannel-info" id="individual_item_<%= individual_item.id %>_accordeon"
+         style="display: none; padding: 16px 24px; box-shadow: 0 2px 18px 0 rgba(0, 53, 94, 0.08); margin-bottom: 24px">
+      <div class="detail-card-item__pannel-item">
+        <div class="detail-card-item__info-label">Материал детали:</div>
+        <div class="detail-card-item__info-text"><%= material_title(individual_item.cut_material.material) %></div>
+      </div>
+      <div class="detail-card-item__pannel-item">
+        <div class="detail-card-item__info-label">Тип резки:</div>
+        <div class="detail-card-item__info-text"><%= individual_item.cut_material.cut.name %></div>
+      </div>
+      <div class="detail-card-item__pannel-item">
+        <div class="detail-card-item__info-label">Длина - Ширина:</div>
+        <div class="detail-card-item__info-text"><%= individual_item.width %> - <%= individual_item.height %> мм.</div>
+      </div>
+      <div class="detail-card-item__pannel-item">
+        <div class="detail-card-item__info-label">Масса 1 детали:</div>
+        <div class="detail-card-item__info-text"><%= individual_item.mass %> г.</div>
+      </div>
+    </div>
+
+    <div class="modal modal_animation_slide" id="modal<%= individual_item.id %>" aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close="data-micromodal-close">
+        <div class="modal__container">
+          <div class="dialog" id="dialog1" role="dialog" aria-modal="true" aria-labelledby="dialog1-dialog__title">
+            <header class="dialog__header">
+              <h2 class="dialog__title" id="dialog1-dialog__title"><%= individual_item.name %></h2>
+              <button class="dialog__close" type="button" data-micromodal-close="data-micromodal-close">
+                <svg class="icon icon_close" role="img" data-micromodal-close="data-micromodal-close">
+                  <title>Close</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#close' %>"></use>
+                </svg>
+                <span class="visuallyhidden">Close this dialog window</span>
+              </button>
+            </header>
+            <main class="dialog__content">
+              <div class="modal-draft-view">
+                <div class="modal-draft-view__wrapper">
+                  <%== individual_item.svg %>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $("#details-item-<%= individual_item.id %>").click(function() {
+        $.ajax({
+          url: "/individual_items/calculate_price",
+          type: "get",
+          dataType: 'json',
+          success: function (data) {
+            $("#get-price-<%= individual_item.id %>").hide();
+            $("#edit-button-<%= individual_item.id %>").hide();
+            $("#item-price-<%= individual_item.id %>").html(data.price + " сом");
+            $("#col-price-<%= individual_item.id %>").show();
+            $("#cart-button-<%= individual_item.id %>").show();
+          },
+          data: {
+            authenticity_token: "<%= session[:_csrf_token] %>",
+            id: "<%= individual_item.id %>",
+            quantity: "<%= individual_item.count %>"
+          }
+        });
+      });
+
+      $("#cart-button-<%= individual_item.id %>").click(function() {
+        const notificationBoard = new App.Notification({ delay: 10000 });
+
+        $.ajax({
+          url: " /individual_items/send_to_cart",
+          type: "get",
+          success: function (data) {
+            notificationBoard.show(data.message, {className: "notification_type_success"});
+            CartCount.updateCartCount()
+          },
+          error: function(){
+            notificationBoard.show(data.message, {className: "notification_type_warning"});
+          },
+          data: {ids : ["<%= individual_item.id %>"]}
+        });
+      });
+
+      $("#accordeon-trigger-<%= individual_item.id %>").on('click', function () {
+        $("#individual_item_<%= individual_item.id %>_accordeon").toggle();
+        $($(this).children()).toggleClass('flip')
+      });
+
+
+
+    </script>
+  <% end %>
+</div>
+
+<div class="details-list__controls details-list__controls_buttom">
+  <%= render partial: 'individual_orders/show/list_controls' %>
+</div>

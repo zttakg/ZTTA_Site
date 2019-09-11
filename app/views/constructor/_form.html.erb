@@ -1,0 +1,125 @@
+<form class="form draft-download__form" method="post" enctype="multipart/form-data" action="<%= constructor_upload_path %>" data-remote="true">
+  <div class="draft-download-form">
+    <div class="draft-download-form__top">
+      <h2 class="draft-download-form__title">Отправить чертеж</h2>
+      <div class="draft-download-form__descr">Загрузка чертежей осуществляется для рассчета стоимости и сроков изготоления.</div>
+    </div>
+    <div class="draft-download-form__content">
+      <div class="draft-download-form__section">
+        <div class="draft-download-form__top-item">
+          <div class="form-item">
+            <div class="form-item__label">
+              <label class="label" for="downloaded-item-name">Название детали:</label>
+            </div>
+            <div class="form-item__control">
+              <span class="input input_block input_type_text input_inline input_style_default">
+                <input class="form-control form-control_type_input input__control" id="downloaded-item-name" name="name" type="text" placeholder="Название детали" value="Закладная №1">
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="draft-download-form__top-item">
+          <div class="form-item">
+            <div class="form-item__label">
+              <label class="label" for="downloaded-carving-type">Тип резки:</label>
+            </div>
+            <div class="form-item__control">
+              <span class="select select_style_default select_block">
+                <select class="form-control form-control_type_select select__control" id="downloaded-carving-type" name="cut_id" data-remote="true">
+                  <option class="select__placeholder">Выберите тип резки</option>
+                  <% @cuts.each do |cut| %>
+                    <option value="<%= cut.id %>"><%= cut.name %></option>
+                  <% end %>
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="draft-download-form__top-item">
+          <div class="form-item">
+            <div class="form-item__label">
+              <label class="label" for="downloaded-item-material">Материал детали:</label>
+            </div>
+            <div class="form-item__control">
+              <span class="select select_style_default select_block">
+                <select class="form-control form-control_type_select select__control" id="downloaded-item-material" name="material_id">
+                  <%= render partial: 'select', locals: { materials: [] } %>
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="draft-download-form__top-item">
+          <div class="form-item">
+            <div class="form-item__label">
+              <label class="label" for="downloaded-item-quantity">Количество деталей:</label>
+            </div>
+            <div class="form-item__control">
+              <span class="input input_block input_icon input_type_number input_inline input_style_default">
+                <span class="input__icon">
+                  <svg class="icon icon_form_quantity" role="img">
+                    <use xlink:href="<%= asset_path 'icons.svg#form_quantity' %>"></use>
+                  </svg>
+                </span>
+                <input class="form-control form-control_type_input input__control" id="downloaded-item-quantity" name="count" type="number" placeholder="Количество деталей" value="1" min="1">
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="draft-download-form__section">
+        <div class="draft-download-form__col">
+          <div class="form-item">
+            <div class="form-item__label">
+              <label class="label" for="downloaded-item-comment">Примечание к заказу:</label>
+            </div>
+            <div class="form-item__control">
+              <span class="textarea textarea_style_default textarea_block"><textarea class="form-control form-control_type_textarea textarea__control" id="downloaded-item-comment" name="description" cols="30" rows="10" placeholder="Комментарий к чертежу"></textarea></span>
+            </div>
+          </div>
+        </div>
+        <div class="draft-download-form__col">
+          <div class="form-item">
+            <div class="form-item__label">
+              <label class="label" for="downloaded-item-file">Чертеж детали:</label>
+            </div>
+            <div class="form-item__control">
+              <label class="file file_type_file file_style_default" for="downloaded-item-file">
+                <input class="form-control form-control_type_file file__control" id="downloaded-item-file" name="attachment" type="file">
+              </label>
+            </div>
+            <div class="form-item__file-tip">Среди желательных форматов являются PDF, многие форматы изображений, DXF и DWG. Размер файла не должен превышать 50 мб.</div>
+          </div>
+        </div>
+      </div>
+      <div class="draft-download-form__controls">
+        <button class="button button_icon button_color_blue button_size_large button_style_gradient button_style_solid button_style_rounded button_style_bold button_style_uppercase button_style_letter-spacing">
+          <svg class="icon icon_upload" role="img">
+            <title>upload</title>
+            <use xlink:href="<%= asset_path 'icons.svg#upload' %>"></use>
+          </svg>
+          <span>Загрузить чертеж</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  $(function () {
+    var sel_material = $('select[name="material_id"]')
+
+    sel_material.prop('disabled', true);
+    $('select[name ="cut_id"]').change(function () {
+      $.ajax({
+        url: "/constructor/select",
+        type: "get",
+        success: function () {
+          sel_material.prop('disabled', false);
+        },
+        data: { cut_id: this.value }
+      });
+    });
+    window.notificationBoard = new App.Notification({delay: 10000});
+  });
+</script>

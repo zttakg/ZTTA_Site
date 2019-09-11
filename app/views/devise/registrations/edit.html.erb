@@ -1,0 +1,224 @@
+<div class="page__top">
+  <div class="page__inner">
+    <div class="bread-crumbs">
+      <ul class="bread-crumbs__list">
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= root_path %>">Главная</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= cabinet_path %>">Личный кабинет</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">Настройки профиля</li>
+      </ul>
+    </div>
+    <h1 class="page-title">Настройки профиля</h1>
+  </div>
+</div>
+<div class="page__main">
+  <div class="page__inner page__inner_flex">
+    <%= render 'layouts/client_sidebar' %>
+    <div class="page__content-col">
+      <div class="cabinet-content">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form form_profile cabinet-content__form' }) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="cabinet-content__section">
+            <h2 class="cabinet-content__section-title">Личные данные</h2>
+            <div class="cabinet-content__form-wrapper">
+              <div class="form-item form-item_inline form__item">
+                <input name="authenticity_token" type="hidden" value="<%= session[:_csrf_token] %>">
+                <div class="form-item__col">
+                  <div class="form-item__label">
+                    <%= f.label :name, class: "label" %>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_text input_inline input_style_default">
+                      <%= f.text_field :name, class: "form-control form-control_type_input input__control" %>
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item__col">
+                  <div class="form-item__label">
+                    <%= f.label :last_name, class: "label" %>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_text input_inline input_style_default">
+                      <%= f.text_field :last_name, class: "form-control form-control_type_input input__control" %>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-item form-item_inline form__item">
+                <div class="form-item__col">
+                  <div class="form-item__label">
+                    <%= f.label :phone_number, class: "label" %>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_tel input_inline input_style_default">
+                      <%= f.text_field :phone_number, class: "form-control form-control_type_input input__control", id: "phone", type: "tel" %>
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item__col">
+                  <div class="form-item__label">
+                    <%= f.label :email, 'Электронная почта:<span>*</span>'.html_safe, class: 'label' %>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_email input_inline input_style_default">
+                      <%= f.email_field :email, class: 'form-control form-control_type_input input__control', required: true %>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-item form__item">
+                <%= link_to 'Изменить пароль', clients_change_password_path %>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet-content__section">
+            <h2 class="cabinet-content__section-title">Реквизиты юридического лица</h2>
+            <div class="cabinet-content__form-wrapper">
+              <div class="cabinet-content__descr-text">Указываются строго в соответствии с учредительными документами организации, которая является плательщиком и получателем заказа</div>
+              <div class="form-item form-item_inline form__item">
+                <div class="form-item__col">
+                  <div class="form-item__label">
+                    <%= f.label :company_name, class: "label" %>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_text input_inline input_style_default">
+                      <%= f.text_field :company_name, class: "form-control form-control_type_input input__control" %>
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item__col">
+                  <div class="form-item__label">
+                    <%= f.label :company_INN, class: "label" %>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_text input_inline input_style_default">
+                      <%= f.text_field :company_INN, class: "form-control form-control_type_input input__control" %>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-item form__item">
+                <div class="form-item__label">
+                  <%= f.label :company_legal_address, class: "label" %>
+                </div>
+                <div class="form-item__control">
+                  <span class="input input_block input_type_text input_inline input_style_default">
+                    <%= f.text_field :company_legal_address, class: "form-control form-control_type_input input__control" %>
+                  </span>
+                </div>
+              </div>
+              <div class="form-item form__item">
+                <div class="form-item__label">
+                  <%= f.label :company_address, class: "label" %>
+                </div>
+                <div class="form-item__control">
+                  <span class="input input_block input_type_text input_inline input_style_default">
+                    <%= f.text_field :company_address, class: "form-control form-control_type_input input__control" %>
+                  </span>
+                </div>
+              </div>
+              <div class="form-item form-item_inline form__item">
+                <div class="form-item__col">
+                  <div class="form-item__label">
+                    <%= f.label :bank_name, class: "label" %>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_text input_inline input_style_default">
+                      <%= f.text_field :bank_name, class: "form-control form-control_type_input input__control" %>
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item__col">
+                  <div class="form-item__label">
+                    <%= f.label :settlement_account, class: "label" %>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_text input_inline input_style_default">
+                      <%= f.text_field :settlement_account, class: "form-control form-control_type_input input__control" %>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-item form-item_inline form__item">
+                <div class="form-item__col">
+                  <div class="form-item__label">
+                    <%= f.label :company_BIC, class: "label" %>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_text input_inline input_style_default">
+                      <%= f.text_field :company_BIC, class: "form-control form-control_type_input input__control" %>
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item__col">
+                  <div class="form-item__label">
+                    <%= f.label :city, class: "label" %>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_text input_inline input_style_default">
+                      <%= f.text_field :city, class: "form-control form-control_type_input input__control" %>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-item form__item">
+                <div class="form-item__label">
+                  <%= f.label :company_OKPO, class: "label" %>
+                </div>
+                <div class="form-item__control">
+                  <span class="input input_block input_type_text input_inline input_style_default">
+                    <%= f.text_field :company_OKPO, class: "form-control form-control_type_input input__control" %>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet-content__section">
+            <h2 class="cabinet-content__section-title">Настройка уведомлений</h2>
+            <div class="cabinet-content__form-wrapper">
+              <div class="form-item form__item">
+                <div class="form-item__control">
+                  <fieldset class="fieldset">
+                    <legend class="fieldset__legend">Получать смс – уведомления?</legend>
+                    <div class="fieldset__item">
+                      <label class="radio radio_style_default" for="form-demo__radio-2">
+                        <input class="form-control form-control_type_radio radio__control" id="form-demo__radio-2" name="form-demo__radio-group-2" type="radio">
+                        <span class="radio__box"></span>
+                        <span class="radio__label">Да</span>
+                      </label>
+                    </div>
+                    <div class="fieldset__item">
+                      <label class="radio radio_style_default" for="form-demo__radio-2">
+                        <input class="form-control form-control_type_radio radio__control" id="form-demo__radio-2" name="form-demo__radio-group-2" type="radio" checked="checked">
+                        <span class="radio__box"></span>
+                        <span class="radio__label">Нет</span>
+                      </label>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet-content__section">
+            <%= f.submit 'Сохранить изменения', class: 'button button_color_green button_size_large button_style_solid button_style_rounded button_style_uppercase button_style_letter-spacing' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

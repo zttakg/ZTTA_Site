@@ -1,0 +1,34 @@
+<div class="page__content page__content_grey">
+  <div class="page__wrapper">
+    <div class="page__main">
+      <div class="page__inner">
+        <div class="log-reg">
+          <img class="log-reg__logo" src="<%= asset_path 'logo.svg' %>" alt="logo">
+          <div class="log-reg__form">
+            <%= form_tag password_verify_path, method: :post do |f| %>
+              <div class="log-reg__form-top">
+                <h2 class="log-reg__title">Введите ваш номер телефона</h2>
+                <% if @error.present? %>
+                  <div style="color: red; margin-bottom: 5px;">
+                    <%= @error[:message] %>
+                  </div>
+                <% end %>
+                <%= hidden_field_tag :phone_number, params[:phone_number] %>
+                <div class="form-item form__item">
+                  <div class="form-item__control">
+                    <span class="input input_block input_inline input_style_default">
+                      <%= text_field_tag :code, '', required: true, autofocus: true, class: 'form-control form-control_type_input input__control', placeholder: 'Код' %>
+                    </span>
+                  </div>
+                </div>
+                <div class="form__submit">
+                  <%= submit_tag 'Отправить', class: 'button button_block button_color_blue button_size_large button_style_solid button_style_rounded' %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

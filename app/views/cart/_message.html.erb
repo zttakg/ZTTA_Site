@@ -1,0 +1,19 @@
+<div class="page__top-message" id="close">
+  <div class="image-message image-message_color_gray image-message_color_orange">
+    <button class="button image-message__close" type="button" onclick="hide('close')">
+      <svg class="icon icon_close-mini" role="img">
+        <title>close</title>
+        <use xlink:href="<%= asset_path 'icons.svg#close-mini' %>"></use>
+      </svg>
+    </button>
+    <div class="image-message__left">
+      <img src="<%= asset_path 'image-message__warning.svg' %>" alt="image">
+    </div>
+    <div class="image-message__right">
+      <h3 class="image-message__title">Минимальная стоимость заказа
+        <span><%= Constant.first.min_order_sum %></span>
+      </h3>
+      <div class="image-message__text">Вы можете дополнить заказ до данной суммы, или продолжить оформление!</div>
+    </div>
+  </div>
+</div>

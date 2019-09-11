@@ -1,0 +1,89 @@
+ru:
+  activerecord:
+    attributes:
+      client:
+        email: Электронная почта
+        name: Имя
+        last_name: Фамилия
+        phone_number: Номер телефона
+        password: Пароль
+        current_password: Текущий пароль
+        password_confirmation: Повторите пароль
+        company_name: Наименование организации
+        company_INN: ИНН
+        company_legal_address: Юридический адрес
+        company_address: Фактический адрес
+        bank_name: Наименование банка
+        settlement_account: Расчетный счет
+        company_BIC: БИК
+        city: Город Банка
+        company_OKPO: Код ОКПО
+    errors:
+      messages:
+        record_invalid: 'Возникли ошибки: %{errors}'
+        restrict_dependent_destroy:
+          has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
+          has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
+      models:
+        detail:
+          attributes:
+            client:
+              required: Не выбран клиент
+            name:
+              blank: Название должно быть заполнено
+              taken: Деталь с таким названием уже существует
+            count:
+              blank: Кол-во деталей должно быть больше нуля
+              greater_than: Кол-во деталей должно быть больше нуля
+              not_a_number: Кол-во деталей должно быть больше нуля
+            cut:
+              blank: Выберите тип реза
+            cut_material:
+              required: Выберите тип реза и материал
+            cut_material_id:
+              blank: Выберите материал
+            detail_width:
+              greater_than: Длинна фигуры должна быть больше нуля
+            detail_height:
+              greater_than: Ширина фигуры должна быть больше нуля
+            detail_radius:
+              greater_than: Радиус скругления фигуры должен быть больше нуля
+            diameter_width:
+              greater_than: Диаметр фигуры должен быть больше нуля
+            holes:
+              negative: Неверные параметры
+              outside: Отверстие вне детали
+
+        client:
+          attributes:
+            email:
+              blank: Электронная почта не может быть пустой
+              taken: Такая электронная почта уже занята
+              invalid: Неверный формат электронной почты
+            password:
+              blank: Пароль не может быть пустым
+              too_short: Слишком короткий пароль
+            password_confirmation:
+              confirmation: Подтвердите пароль
+            current_password:
+              blank: Введите текущий пароль
+              invalid: Неверный текущий пароль
+            phone_number:
+              blank: Введите номер телефона
+              invalid: Неверный формат номера телефона
+            eula:
+              accepted: Вы не приняли условия пользовательского соглашения
+  errors:
+    format: "%{message}"
+    critical:
+      parsing: 'Ошибка получения данных #%{code}'
+      cost_calculate: 'Ошибка вычисления стоимости #%{code}'
+      calculate_preparation_time: 'Ошибка вычисления времени производства #%{code}'
+      price_data: 'Ошибка отображения данных стоимости #%{code}'
+      detail:
+        not_found: Деталь не найдена
+      upload_detail:
+        not_found: Выберете чертеж детали
+      cut_material: Выберите тип реза и материал
+      individual_order:
+        required: 'Заполните обязательные поля помеченные красной звездочкой'

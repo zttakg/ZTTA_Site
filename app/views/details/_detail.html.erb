@@ -1,0 +1,125 @@
+<% case detail.load_type%>
+<% when "constructor" %>
+  <%= render partial: 'constructor_detail', locals: { detail: detail } %>
+<% when "custom" %>
+  <%= render partial: 'custom_detail', locals: { detail: detail } %>
+<% end %>
+
+<div class="modal modal_animation_slide" id="modal<%= detail.id %>" aria-hidden="true">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close="data-micromodal-close">
+    <div class="modal__container">
+      <div class="dialog" id="dialog1" role="dialog" aria-modal="true" aria-labelledby="dialog1-dialog__title">
+        <header class="dialog__header">
+          <h2 class="dialog__title" id="dialog1-dialog__title"><%= detail.name %></h2>
+          <button class="dialog__close" type="button" data-micromodal-close="data-micromodal-close">
+            <svg class="icon icon_close" role="img" data-micromodal-close="data-micromodal-close">
+              <title>Close</title>
+              <use xlink:href="<%= asset_path'icons.svg#close' %>"></use>
+            </svg>
+            <span class="visuallyhidden">Close this dialog window</span>
+          </button>
+        </header>
+        <main class="dialog__content">
+          <div class="ta-center padding-bottom-20">
+            Длина: <%= detail.height %> мм. /
+            Ширина: <%= detail.width %> мм.
+          </div>
+          <div class="modal-draft-view">
+            <div class="modal-draft-view__wrapper">
+              <%== detail.svg %>
+            </div>
+            <%= link_to 'Скачать', detail_path(detail, format: :svg), class: "button button_color_blue button_size_small button_style_solid button_style_rounded ta-center m-top-20" %>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  quantity = "<%= detail.count %>"
+
+  $("#delete_detail_<%= detail.id %>").click(function(){
+    $.ajax({
+      url: "/details/" + "<%= detail.id %>",
+      type: "delete",
+      success: function (data) {
+        $('.items-count').html(data.items_count);
+        App.Accordion(".detail-card-item");
+      },
+      data: { authenticity_token: "<%= session[:_csrf_token] %>" }
+    });
+  });
+
+  $("#detail-price-refresh-<%= detail.id %>").click(function(){
+    quantity = document.getElementById("detail-quantity-<%= detail.id %>").value;
+
+    $.ajax({
+      url: "/details/calculate_cost",
+      type: "post",
+      dataType: 'json',
+      success: function (data) {
+        $('#detail-card-item__show-price-<%= detail.id %>').hide();
+        $('#detail-price-refresh-<%= detail.id %>').hide();
+        $('#detail-<%= detail.id %>-card-item__cart-button').show();
+        $('#detail-<%= detail.id %>-card-item__price').show();
+        $('#detail-price-<%= detail.id %>').show();
+        $('#detail-price-<%= detail.id %>').html(data.price + " сом");
+      },
+      data: {
+        authenticity_token: "<%= session[:_csrf_token] %>",
+        id: "<%= detail.id %>",
+        quantity: quantity
+      }
+    });
+  });
+
+  $("#show-price-<%= detail.id %>").click(function(){
+    $.ajax({
+      url: "/details/calculate_cost",
+      type: "post",
+      dataType: 'json',
+      success: function (data) {
+        $('#detail-card-item__show-price-<%= detail.id %>').hide();
+        $('#detail-<%= detail.id %>-card-item__cart-button').show();
+        $('#detail-<%= detail.id %>-card-item__price').show();
+        $('#detail-price-<%= detail.id %>').html(data.price + " сом");
+      },
+      data: {
+        authenticity_token: "<%= session[:_csrf_token] %>",
+        id: "<%= detail.id %>",
+        quantity: quantity
+      }
+    });
+  });
+
+  $("#detail-<%= detail.id %>-card-item__quantity").change(function(){
+    $('#detail-card-item__show-price-<%= detail.id %>').hide();
+    $('#detail-<%= detail.id %>-card-item__cart-button').hide();
+    $('#detail-<%= detail.id %>-card-item__price').show();
+    $('#detail-price-<%= detail.id %>').hide()
+    $('#detail-price-refresh-<%= detail.id %>').show();
+  });
+
+  $("#add_to_cart_<%= detail.id %>").click(function(){
+    const notificationBoard = new App.Notification({ delay: 10000 });
+
+    $.ajax({
+      url: " /details/add_to_cart",
+      type: "post",
+      success: function (data) {
+        notificationBoard.show(data.message, {className: "notification_type_success"});
+          CartCount.updateCartCount();
+      },
+      error: function(){
+        notificationBoard.show(data.message, {className: "notification_type_warning"});
+      },
+      data: {
+        id : "<%= detail.id %>",
+        authenticity_token: "<%= session[:_csrf_token] %>",
+        quantity: quantity
+      }
+    });
+  });
+</script>

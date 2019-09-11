@@ -1,0 +1,16 @@
+<div class="order-delivery-info__section">
+  <div class="order-delivery-info__item">
+    <div class="order-delivery-info__label">Способ доставки:</div>
+    <div class="order-delivery-info__text"><%= convert_delivery_method(individual_order) %></div>
+  </div>
+  <% if individual_order.delivery_method == 'delivery' %>
+    <div class="order-delivery-info__item">
+      <div class="order-delivery-info__label">Регион, город:</div>
+      <div class="order-delivery-info__text"><%= individual_order.city %></div>
+    </div>
+    <div class="order-delivery-info__item">
+      <div class="order-delivery-info__label">Адрес доставки:</div>
+      <div class="order-delivery-info__text"><%= individual_order.delivery_address %></div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,100 @@
+<div class="page__footer">
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__logo">
+        <div class="footer-logo">
+          <div class="footer-logo__inner">
+            <a href="<%= root_path %>">
+              <img src="<%= asset_path 'logo_white.svg' %>" alt="logo">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__menu">
+        <div class="footer-menu">
+          <div class="footer-menu__inner">
+            <div class="footer-menu__item">
+              <a class="footer-menu__link" href="<% root_path %>">Главная</a>
+            </div>
+            <div class="footer-menu__item">
+              <a class="footer-menu__link" href="<%= services_path %>">Продукция и Услуги</a>
+            </div>
+            <div class="footer-menu__item">
+              <a class="footer-menu__link" href="<%= about_us_path %>">О нас</a>
+            </div>
+            <div class="footer-menu__item">
+              <a class="footer-menu__link" href="<%= delivery_path %>">Доставка и оплата</a>
+            </div>
+            <div class="footer-menu__item">
+              <a class="footer-menu__link" href="<%= contacts_path %>">Контакты</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__copyright">
+        <div class="copyright">
+          <div class="copyright__inner">
+            <span>© 2013 - <%= Date.today.year %> ОcОО «Завод Темир Тулпар Азия»</span>
+            <div class="copyright__scroll-top">
+              <button class="scroll-top" type="button">
+                <span class="visuallyhidden">Scroll page top</span>
+                <svg class="icon icon_accordion-arrow scroll-top__icon" role="img">
+                  <title>Наверх</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#accordion-arrow' %>"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__descr">ОсОО "Завод Темир Тулпар Азия" - единственный в Кыргызстане и Средней Азии завод, серийно выпускающий готовые металлические фермы для навесов, теплиц, ангаров и других металлоконструкций.</div>
+      <div class="footer__security">
+        <div class="payments-security">
+          <h3 class="payments-security__title">Безопасность платежей:</h3>
+          <div class="payments-security__logos">
+            <div class="payments-security__item">
+              <img src="<%= asset_path 'payments-security__uniteller.svg' %>" alt="uniteller">
+            </div>
+            <div class="payments-security__item">
+              <img src="<%= asset_path 'payments-security__visa.svg' %>" alt="visa">
+            </div>
+            <div class="payments-security__item">
+              <img src="<%= asset_path 'payments-security__optima.svg' %>" alt="optima">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__links">
+        <a href=<%= user_agreement_path %>>пользовательское соглашение</a>
+
+        <a href=<%= privacy_policy_path %>>политика конфиденциальности</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__social">
+        <div class="social-icons">
+          <ul class="social-icons__list">
+            <li class="social-icons__item">
+              <a class="social-icons__link" href="<%= contacts.fb_link %>" target="_blank">
+                <svg class="icon icon_social_fb social-icons__icon" role="img">
+                  <title>Facebook</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#social_fb' %>"></use>
+                </svg>
+                <span>Facebook</span>
+              </a>
+            </li>
+            <li class="social-icons__item">
+              <a class="social-icons__link" href="<%= contacts.instagram_link %>" target="_blank">
+                <svg class="icon icon_social_insta social-icons__icon" role="img">
+                  <title>Instagram</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#social_insta' %>"></use>
+                </svg>
+                <span>Instagram</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

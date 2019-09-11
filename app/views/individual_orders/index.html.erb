@@ -1,0 +1,69 @@
+<div class="page__top">
+  <div class="page__inner">
+    <div class="bread-crumbs">
+      <ul class="bread-crumbs__list">
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= root_path %>">Главная</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= cabinet_path %>">Личный кабинет</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">Мои заказы</li>
+      </ul>
+    </div>
+    <h1 class="page-title">Мои заказы</h1>
+  </div>
+</div>
+
+<% if @orders.present? %>
+  <div class="page__main">
+    <div class="page__inner">
+      <div class="tabs tabs_style_default tabs_simple" data-tabs-name="orders-list">
+        <span class="tabs__description visuallyhidden" data-tabs-description="data-tabs-description">Use left and right arrows to navigate between tabs.</span>
+        <div class="tabs__head">
+          <button class="tabs__tab" type="button" data-tab-id="all">
+            <span class="tabs__title">Все заказы</span>
+          </button>
+          <button class="tabs__tab" type="button" data-tab-id="finished">
+            <span class="tabs__title">Завершенные</span>
+          </button>
+          <button class="tabs__tab" type="button" data-tab-id="in-progress">
+            <span class="tabs__title">В процессе</span>
+          </button>
+          <button class="tabs__tab" type="button" data-tab-id="canceled">
+            <span class="tabs__title">Отмененные заказы</span>
+          </button>
+        </div>
+        <div class="tabs__body">
+            <div class="tabs__panel" data-panel-id="all">
+              <%= render partial: "individual_orders/index/tabs_panel", locals: { status: "all"  } %>
+            </div>
+            <div class="tabs__panel" data-panel-id="finished">
+              <%= render partial: "individual_orders/index/tabs_panel", locals: { status: "finished" } %>
+            </div>
+            <div class="tabs__panel" data-panel-id="in-progress">
+              <%= render partial: "individual_orders/index/tabs_panel", locals: { status: "in_progress" } %>
+            </div>
+            <div class="tabs__panel" data-panel-id="canceled">
+              <%= render partial: "individual_orders/index/tabs_panel", locals: { status: "canceled" } %>
+            </div>
+          <div class="tabs__preloader" data-tabs-preloader="data-tabs-preloader"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render partial: "individual_orders/index/empty_orders", locals: { status: "completed" } %>
+<% end %>

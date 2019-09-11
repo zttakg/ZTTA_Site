@@ -1,0 +1,119 @@
+<div class="page__content page__content_grey">
+  <div class="page__wrapper">
+    <div class="page__main">
+      <div class="page__inner">
+        <div class="log-reg">
+          <img class="log-reg__logo" src="<%= asset_path 'logo.svg' %>" alt="logo">
+          <div class="log-reg__form">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= devise_error_messages! %>
+              <div class="log-reg__form-top">
+                <h2 class="log-reg__title">Регистрация</h2>
+                <div class="form-item form__item">
+                  <div class="form-item__label">
+                    <label class="label" for="reg__first-name">Имя:</label>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_text input_inline input_style_default">
+                      <input class="form-control form-control_type_input input__control" id="reg__first-name" name="client[name]" type="text" value="<%= params.fetch(:client, {})[:name] %>">
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item form__item">
+                  <div class="form-item__label">
+                    <label class="label" for="reg__last-name">Фамилия:</label>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_text input_inline input_style_default">
+                      <input class="form-control form-control_type_input input__control" id="reg__last-name" name="client[last_name]" type="text" value="<%= params.fetch(:client, {})[:last_name] %>">
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item form__item">
+                  <div class="form-item__label required">
+                    <label class="label" for="reg__phone">Номер телефона:</label>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_tel input_inline input_style_default">
+                      <input class="form-control form-control_type_input input__control phone_input" id="phone" name="client[phone_number]" type="tel" value="<%= params.fetch(:client, {})[:phone_number] %>">
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item form__item">
+                  <div class="form-item__label required">
+                    <label class="label" for="reg__email">Электронная почта:</label>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_email input_inline input_style_default">
+                      <input class="form-control form-control_type_input input__control" id="reg__email" name="client[email]" type="email" value="<%= params.fetch(:client, {})[:email] %>">
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item form__item">
+                  <div class="form-item__label required">
+                    <label class="label" for="reg__password">Пароль:</label>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_password input_inline input_style_default">
+                      <input class="form-control form-control_type_input input__control" id="reg__password" name="client[password]" type="password">
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item form__item">
+                  <div class="form-item__label required">
+                    <label class="label" for="reg__retype-password">Повторите пароль:</label>
+                  </div>
+                  <div class="form-item__control">
+                    <span class="input input_block input_type_password input_inline input_style_default">
+                      <input class="form-control form-control_type_input input__control" id="reg__retype-password" name="client[password_confirmation]" type="password">
+                    </span>
+                  </div>
+                </div>
+                <div class="form-item form__item">
+                  <label class="checkbox checkbox_style_default" for="client_eula">
+                    <input
+                      id="client_eula"
+                      class="form-control form-control_type_checkbox checkbox__control"
+                      name="client[eula]"
+                      type="checkbox"
+                      value="accept"
+                    >
+                    <span class="checkbox__box"></span>
+                    <span class="checkbox__label">Я принимаю условия <a href=<%= user_agreement_path %>>пользовательского соглашения</a></span>
+                  </label>
+                </div>
+                <div class="form__submit">
+                  <button
+                    id="submit_register"
+                    class="button button_block button_color_blue button_size_large button_style_solid button_style_rounded"
+                    type="submit"
+                  >Зарегистрироваться</button>
+                </div>
+              </div>
+              <div class="log-reg__form-bottom">
+                <span>У вас уже есть аккаунт?
+                  <a href="<%= new_session_path(resource_name) %>">Войти</a>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    var $submitRegister = $('#submit_register');
+    var $clientEulaCheckbox = $('#client_eula');
+    $submitRegister.prop('disabled', true);
+
+    $clientEulaCheckbox.on('change', function () {
+      var $inputCheck = $(this).prop("checked");
+      if ($inputCheck == true) {
+        $submitRegister.prop('disabled', false);
+      } else {
+        $submitRegister.prop('disabled', true);
+      }
+    });
+</script>

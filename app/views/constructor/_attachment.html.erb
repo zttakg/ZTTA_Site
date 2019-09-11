@@ -1,0 +1,86 @@
+<% if @details.present? %>
+  <h2 class="section-title">Чертежи на отправку:</h2>
+  <div class="results-table results-table_download">
+    <% @details.each do |detail| %>
+      <div class="results-table__section-item" id="section-item-<%= detail.id %>">
+        <div class="results-table__top">
+          <h3 class="results-table__title"><%= detail.name %></h3>
+        </div>
+        <div class="results-table__bottom">
+          <div class="results-table__section">
+            <div class="results-table__item">
+              <div class="results-table__label">
+                <span>Тип резки:</span>
+              </div>
+              <div class="results-table__text">
+                <span><%= detail.cut_material.cut.name %></span>
+              </div>
+            </div>
+            <div class="results-table__item">
+              <div class="results-table__label">
+                <span>Материал детали:</span>
+              </div>
+              <div class="results-table__text">
+                <span><%= material_title(detail.cut_material.material) %></span>
+              </div>
+            </div>
+            <div class="results-table__item">
+              <div class="results-table__label">
+                <span>Количество:</span>
+              </div>
+              <div class="results-table__text">
+                <span><%= detail.count.to_i %> шт.</span>
+              </div>
+            </div>
+            <div class="results-table__item">
+              <div class="results-table__label">
+                <span>Файл:</span>
+              </div>
+              <div class="results-table__text">
+                <span><%= detail.attachment.file.filename if detail.attachment.file %></span>
+              </div>
+            </div>
+            <div class="results-table__item">
+              <div class="results-table__label">
+                <span></span>
+              </div>
+              <div class="results-table__text">
+                <span></span>
+              </div>
+            </div>
+            <div class="results-table__item">
+              <a class="button button_icon button_color_gray button_size_normal button_style_transparent button_style_solid button_style_rounded" href="/constructor/destroy_detail?id=<%= detail.id %>" data-method="delete" data-remote="true">
+                <svg class="icon icon_delete" role="img">
+                  <title>delete</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#delete' %>"></use>
+                </svg>
+                <span>Удалить</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="results-table__upload">
+      <a class="button button_icon button_color_green button_size_normal button_style_transparent button_style_solid button_style_rounded" href="#">
+        <svg class="icon icon_save" role="img">
+          <title>save</title>
+          <use xlink:href="<%= asset_path 'icons.svg#save' %>"></use>
+        </svg>
+        <span>Отправить чертеж</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    $(function () {
+      $('.results-table__upload').click(function () {
+        $.ajax({
+          url: "/constructor/send_drawing",
+          type: "put",
+          data: { details_ids: "<%= @details.pluck(:id) %>" }
+        });
+      });
+    });
+  </script>
+<% end %>

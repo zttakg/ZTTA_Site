@@ -1,0 +1,11 @@
+<div class="services-list__item">
+  <div class="services-list-item">
+    <a class="services-list-item__img" href="<%= service_path(service) %>">
+      <%= image_tag('https://erp.ztta.kg' + service.try(:cover_url).to_s) %>
+    </a>
+    <div class="services-list-item__content">
+      <h3 class="services-list-item__title"><%= service.title %></h3>
+    </div>
+    <a class="services-list-item__link" href="<%= service_path(service) %>"></a>
+  </div>
+</div>

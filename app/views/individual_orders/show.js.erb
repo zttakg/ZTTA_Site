@@ -1,0 +1,7 @@
+$(".details-list").html("<%= escape_javascript(render partial: "individual_orders/show/list") %>");
+$(".pagination").html("<%= escape_javascript(render partial: 'shared/pagination', locals: { url: individual_order_path(@individual_order), collection: @individual_items }) %>");
+
+// On page load
+$.each(formValues, function(key, value) {
+  $("#" + key).prop('checked', value);
+});

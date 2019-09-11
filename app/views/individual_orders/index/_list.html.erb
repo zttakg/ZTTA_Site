@@ -1,0 +1,58 @@
+<% orders.each do |individual_order| %>
+  <div class="orders-info-list">
+    <div class="orders-info-list__item">
+      <div class="order-info-item">
+        <div class="order-info-item__info">
+          <div class="order-info-item__col order-info-item__col_id">
+            <div class="order-info-item__label">ID заказа</div>
+            <div class="order-info-item__text" title="<%= individual_order.id %>"><%= pretty_id(individual_order.id) %></div>
+          </div>
+          <div class="order-info-item__col order-info-item__col_status">
+            <div class="order-info-item__label">Статус заказа</div>
+            <div class="order-info-item__text order-info-item__text_status_<%= individual_order.status %>" title="<%= humanize_order_status(individual_order.status) %>"><%= humanize_order_status(individual_order.status) %></div>
+          </div>
+          <div class="order-info-item__col order-info-item__col_start-date">
+            <div class="order-info-item__label">Дата заказа</div>
+            <div class="order-info-item__text" title="<%= convert_date(individual_order.created_at) %>"><%= convert_date(individual_order.created_at) %></div>
+          </div>
+          <div class="order-info-item__col order-info-item__col_finish-date">
+            <% if individual_order.status == "finished" %>
+              <div class="order-info-item__label">Завершен</div>
+              <div class="order-info-item__text" title="<%= convert_date(individual_order.updated_at) %>"><%= convert_date(individual_order.updated_at) %></div>
+            <% elsif ['paid', 'in_progress'].include?(individual_order.status) %>
+              <div class="order-info-item__label">Дата завершения</div>
+              <div class="order-info-item__text" title="<%= convert_date(individual_order.production_date) %>"><%= convert_date(individual_order.production_date) %></div>
+            <% else %>
+              <div class="order-info-item__label">Изготовление
+                <button class="order-info-item__tip" type="button" data-tooltip-id="tip" data-tooltip-placement="top">
+                  <svg class="icon icon_question-tooltip" role="img">
+                    <title></title>
+                    <use xlink:href="<%= asset_path 'icons.svg#question-tooltip' %>"></use>
+                  </svg>
+                </button>
+                <div class="hidden" data-tooltip-target="tip">Срок изготовления в днях</div>
+              </div>
+              <div class="order-info-item__text" title="<%= individual_order.production_time.to_i %>"><%= individual_order.production_time.to_i %></div>
+            <% end %>
+          </div>
+          <div class="order-info-item__col order-info-item__col_price">
+            <div class="order-info-item__label">Стоимость</div>
+            <div class="order-info-item__text" title="<%= individual_order.total_price.to_i %> сом"><%= individual_order.total_price.to_i %> сом</div>
+          </div>
+        </div>
+        <div class="order-info-item__trigger-wrapper">
+          <a class="button order-info-item__trigger" href="<%= individual_order_path(individual_order) %>">
+            <svg class="icon icon_arrow-right-big" role="img">
+              <title>trigger</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right-big' %>"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="pagination">
+  <%= render partial: 'shared/pagination', locals: { url: individual_orders_path(status: status), collection: orders, tab: "#orders-list__" + status } %>
+</div>

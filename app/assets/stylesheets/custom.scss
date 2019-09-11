@@ -1,0 +1,143 @@
+.confirmation_hint {
+  background: #f44336;
+  padding: 3px 0;
+  text-align: center;
+
+  a {
+    color: #ffffff;
+  }
+}
+
+.button-link {
+  background-color: transparent;
+  border: none;
+  color: #39f;
+  padding-left: 0px;
+}
+
+.button-link:hover {
+  cursor: pointer;
+  color: #39f;
+  text-decoration: underline;
+}
+
+.order-info-item__text_status_in-progress, .order-info-item__text_status_proof_payment {
+  color: #3399ff;
+  text-transform: uppercase;
+}
+
+.order-info-item__text_status_waiting, .order-info-item__text_status_payment_error {
+  color: #f46700;
+  text-transform: uppercase;
+}
+
+.order-info-item__text_status_paid {
+  color: #39f;
+  text-transform: uppercase;
+}
+
+.order-info-item__text_status_pending_payment {
+  color: #f46700;
+  text-transform: uppercase;
+}
+
+.details-item__draft{
+  width: 84px;
+  height: 60px;
+  padding: 5px;
+  border: solid 1px #eff1f4;
+
+  position: relative;
+
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-right: 17px;
+  overflow: hidden;
+
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+}
+
+.footer__links {
+  max-width: 795px;
+  margin: 10px auto 0;
+
+  font-size: 1em;
+  text-align: center;
+  color: #7c8b9b;
+}
+.footer__links a,
+.footer__links a:visited {
+  color: #7c8b9b;
+  margin: 0 10px;
+}
+
+.footer__links a:hover,
+.footer__links a:active,
+.footer__links a:focus {
+  color: #39f;
+}
+
+#error_explanation {
+  font-size: 16px;
+  color: red;
+  padding: 20px 32px 0;
+
+  h2 {
+    display: none;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  }
+}
+
+#draft-download {
+  margin-top: 40px;
+}
+
+.modal-draft-view__wrapper {
+  width: 400px;
+  svg{
+    width: 100%;
+    height: 100%;
+    max-height: 50vh;
+  }
+}
+
+.detail-card-item__draft > svg{
+  width: 100%;
+  height: 100%;
+}
+
+.details-item__draft > svg{
+  width: 100%;
+  height: 100%;
+}
+
+.padding-bottom-20{
+  padding-bottom: 20px;
+}
+.m-top-20{
+  margin-top: 20px;
+}
+.flip {
+  transform: rotate(180deg);
+}

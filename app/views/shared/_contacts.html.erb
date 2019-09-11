@@ -1,0 +1,52 @@
+<div class="contacts-full__info">
+  <div class="contacts-info">
+    <div class="contacts-info__list">
+      <div class="contacts-info__item">
+        <div class="contacts-info__label">Металлоконструкции:</div>
+        <div class="contacts-info__content">
+          <div class="contacts-info__content-item"><%= contacts.metalware %></div>
+          <div class="contacts-info__content-item contacts-info__content-item_icon">
+            <a href="<%= contacts.telegram_link_for_metalware %>" target='blank'>
+              <img src="<%= asset_path 'contacts-info__telegram.svg' %>" alt="telegram">
+            </a>
+          </div>
+          <div class="contacts-info__content-item contacts-info__content-item_icon">
+            <a href="<%= contacts.whatsapp_link_for_metalware %>" target='blank'>
+              <img src="<%= asset_path 'contacts-info__whatsapp.svg' %>" alt="whatsapp">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="contacts-info__item">
+        <div class="contacts-info__label">Резка листа:</div>
+        <div class="contacts-info__content">
+          <div class="contacts-info__content-item"><%= contacts.cutting %></div>
+          <div class="contacts-info__content-item contacts-info__content-item_icon">
+            <a href="<%= contacts.telegram_link %>" target='blank'>
+              <img src="<%= asset_path 'contacts-info__telegram.svg' %>" alt="telegram">
+            </a>
+          </div>
+          <div class="contacts-info__content-item contacts-info__content-item_icon">
+            <a href="<%= contacts.whatsapp_link %>" target='blank'>
+              <img src="<%= asset_path 'contacts-info__whatsapp.svg' %>" alt="whatsapp">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="contacts-info__item">
+        <div class="contacts-info__label">E-mail:</div>
+        <div class="contacts-info__content">
+          <div class="contacts-info__content-item">
+            <a href="#"><%= contacts.email %></a>
+          </div>
+        </div>
+      </div>
+      <div class="contacts-info__item">
+        <div class="contacts-info__label">Наш адрес:</div>
+        <div class="contacts-info__content">
+          <div class="contacts-info__content-item"><%= contacts.address %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<option class="select__placeholder">Выберите материал</option>
+<% materials.each do |material| %>
+  <option value="<%= material.id %>"><%= material.name %>  <%= material.thickness %> мм.</option>
+<% end %>

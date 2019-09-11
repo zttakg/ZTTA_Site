@@ -1,0 +1,105 @@
+<div class="page__header">
+  <header class="header">
+    <% if client_signed_in? && current_client.unconfirmed? %>
+      <div class="confirmation_hint">
+        <%= link_to 'Подтвердите аккаунт', clients_confirmation_path %>
+      </div>
+    <% end %>
+    <div class="header__inner">
+      <div class="header__logo">
+        <a class="logo" href="<%= root_path %>">
+          <img src="<%= asset_path 'logo.svg' %>" alt="logo">
+        </a>
+      </div>
+      <div class="header__menu">
+        <nav class="main-menu">
+          <ul class="main-menu__list">
+            <li class="main-menu__item">
+              <a class="main-menu__link" href="<%= constructor_path %>">Конструктор</a>
+            </li>
+            <li class="main-menu__item">
+              <a class="main-menu__link" href="<%= services_path %>">Продукция и Услуги</a>
+            </li>
+            <li class="main-menu__item">
+              <a class="main-menu__link" href="<%= about_us_path %>">О нас</a>
+            </li>
+            <li class="main-menu__item">
+              <a class="main-menu__link" href="<%= delivery_path %>">Доставка и оплата</a>
+            </li>
+            <li class="main-menu__item">
+              <a class="main-menu__link" href="<%= contacts_path %>">Контакты</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header__profile">
+        <div class="header-profile">
+          <% if client_signed_in? %>
+            <div class="header-profile__item">
+              <a class="cart-link cart-link_full" href="/cart">
+                <div class="cart-link__icon">
+                  <div class="cart-link__badge">
+                    <%= render partial: "layouts/cart_badge" %>
+                  </div>
+                </div>
+                <div class="cart-link__text">Корзина</div>
+              </a>
+            </div>
+            <div class="header-profile__item">
+              <div class="login-link">
+                <button class="login-link__trigger" type="button" data-dropdown-trigger="data-dropdown-trigger">
+                  <span class="login-link__icon">
+                    <svg class="icon icon_profile" role="img">
+                      <title>profile</title>
+                      <use xlink:href="<%= asset_path 'icons.svg#profile' %>"></use>
+                    </svg>
+                  </span>
+                  <% if current_client.name || current_client.last_name %>
+                    <span class="login-link__text"><%= current_client.last_name %> <%= current_client.name %></span>
+                  <% else %>
+                    <span class="login-link__text"><%= current_client.email %></span>
+                  <% end %>
+                </button>
+                <div class="login-link__menu" data-dropdown-menu="data-dropdown-menu">
+                  <div class="login-link-menu">
+                    <div class="login-link-menu__item">
+                      <a class="login-link-menu__link" href="<%= cabinet_path %>">Личный кабинет</a>
+                    </div>
+                    <div class="login-link-menu__item">
+                      <a class="login-link-menu__link" href="<%= details_path %>">Мои детали</a>
+                    </div>
+                    <div class="login-link-menu__item">
+                      <a class="login-link-menu__link" href="<%= individual_orders_path %>">Мои заказы</a>
+                    </div>
+                    <div class="login-link-menu__item">
+                      <a class="login-link-menu__link" href="<%= edit_client_registration_path %>">Настройки профиля</a>
+                    </div>
+                    <div class="login-link-menu__item">
+                      <a class="login-link-menu__link" href="<%= destroy_client_session_path %>" data-method="delete">Выйти</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <% if Client.session_cart_items(session[:cart_session]).present? %>
+              <div class="header-profile__item">
+                <a class="cart-link cart-link_full" href="/cart">
+                  <div class="cart-link__icon">
+                    <div class="cart-link__badge">
+                      <div class="badge badge_style_circle badge_size_small badge_style_solid badge_color_blue"><%= Client.session_cart_items(session[:cart_session]).count %></div>
+                    </div>
+                  </div>
+                  <div class="cart-link__text">Корзина</div>
+                </a>
+              </div>
+            <% end %>
+            <div class="header-profile__item">
+              <a class="button button_color_gray button_size_normal button_style_solid button_style_rounded header-profile__login-button" href="<%= new_client_session_path %>">Войти</a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>

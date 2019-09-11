@@ -1,0 +1,21 @@
+<div class="page__inner">
+  <div class="page__constructor-links">
+    <div class="page-links">
+      <div class="page-links__inner">
+        <a class="page-links__link-item" href="/constructor">Конструктор деталей</a>
+        <a class="page-links__link-item page-links__link-item_active" href="/constructor/attachment">Загрузить чертеж детали</a>
+      </div>
+    </div>
+  </div>
+  <div class="page__draft-downaload">
+    <div class="draft-download">
+
+      <%= render partial: 'form' %>
+
+      <div id="draft-download">
+        <%= render partial: 'attachment' %>
+      </div>
+    </div>
+  </div>
+  <div class="tabs__preloader" data-tabs-preloader="data-tabs-preloader"></div>
+</div>

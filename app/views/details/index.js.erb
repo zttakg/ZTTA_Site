@@ -1,0 +1,2 @@
+$(".detail-cards-list").html("<%= j render partial: @details %>");
+$(".pagination").html("<%= j render partial: 'shared/pagination', locals: { url: details_path, collection: @details } %>");

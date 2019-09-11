@@ -1,0 +1,124 @@
+<div class="page__top">
+  <div class="page__inner">
+    <div class="bread-crumbs">
+      <ul class="bread-crumbs__list">
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= root_path %>">Главная</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= cabinet_path %>">Личный кабинет</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= individual_orders_path %>">Мои заказы</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">Информация о заказе</li>
+      </ul>
+    </div>
+    <div class="order-top-info">
+      <div class="order-top-info__id">ID заказа:
+        <span><%= pretty_id(@individual_order.id) %></span>
+      </div>
+      <div class="order-top-info__status order-top-info__status_<%= @individual_order.status %>">Статус заказа:
+        <span><%= humanize_order_status(@individual_order.status) %></span>
+      </div>
+      <div class="order-top-info__bottom">
+        <div class="order-top-info__item">Дата:
+          <span><%= convert_datetime(@individual_order.created_at) %></span>
+        </div>
+        <div class="order-top-info__item">К оплате:
+          <span><%= @individual_order.total_price.to_i %> сом</span>
+        </div>
+        <div class="order-top-info__button">
+          <a class="button button_icon button_color_blue button_size_normal button_style_solid button_style_rounded" href="<%= individual_order_path(@individual_order.id, format: :pdf) %>">
+            <svg class="icon icon_print" role="img">
+              <title>print</title>
+              <use xlink:href="<%= asset_path 'icons.svg#print' %>"></use>
+            </svg>
+            <span>Распечать счет фактуру</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page__main">
+  <div class="page__inner">
+    <div class="tabs tabs_style_default tabs_simple tabs_full-width" data-tabs-name="details">
+      <span class="tabs__description visuallyhidden" data-tabs-description="data-tabs-description">Use left and right arrows to navigate between tabs.</span>
+      <div class="tabs__head">
+        <button class="tabs__tab" type="button" data-tab-id="details-list">
+          <span class="tabs__icon">
+            <svg class="icon icon_all-details" role="img">
+              <title>all-details</title>
+              <use xlink:href="<%= asset_path 'icons.svg#all-details' %>"></use>
+            </svg>
+          </span>
+          <span class="tabs__title">Список деталей</span>
+        </button>
+        <button class="tabs__tab" type="button" data-tab-id="order-info">
+          <span class="tabs__icon">
+            <svg class="icon icon_receipt" role="img">
+              <title>receipt</title>
+              <use xlink:href="<%= asset_path 'icons.svg#receipt' %>"></use>
+            </svg>
+          </span>
+          <span class="tabs__title">Информация о заказе</span>
+        </button>
+      </div>
+      <div class="tabs__body">
+        <div class="tabs__panel" data-panel-id="details-list">
+          <div class="details-list">
+            <div class="details-list__message">
+              <div class="image-message image-message_color_gray image-message_color_orange" id="close">
+                <button class="button image-message__close" type="button" onclick="hide('close')">
+                  <svg class="icon icon_close-mini" role="img">
+                    <title>close</title>
+                    <use xlink:href="<%= asset_path 'icons.svg#close-mini' %>"></use>
+                  </svg>
+                </button>
+                <div class="image-message__left">
+                  <img src="<%= asset_path 'image-message__warning.svg' %>" alt="image">
+                </div>
+                <div class="image-message__right">
+                  <h3 class="image-message__title">Внимание, возможно изменение цен!</h3>
+                  <div class="image-message__text">Цена изготовления зависит от стоимости металла на рынке в день заказа.</div>
+                </div>
+              </div>
+            </div>
+            <%= render partial: 'individual_orders/show/list' %>
+          </div>
+          <div class="pagination">
+            <%= render partial: 'shared/pagination', locals: { url: individual_order_path(@individual_order), collection: @individual_items } %>
+          </div>
+        </div>
+
+        <div class="tabs__panel" data-panel-id="order-info">
+          <% if @individual_order.person_type == "legal" %>
+            <%= render partial: 'individual_orders/show/info_legal_tab', locals: { individual_order: @individual_order } %>
+          <% else %>
+            <%= render partial: 'individual_orders/show/info_individual_tab', locals: { individual_order: @individual_order } %>
+          <% end %>
+        </div>
+        <div class="tabs__preloader" data-tabs-preloader="data-tabs-preloader"></div>
+      </div>
+    </div>
+  </div>
+</div>

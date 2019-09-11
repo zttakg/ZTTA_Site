@@ -1,0 +1,61 @@
+<div class="page__sidebar">
+  <div class="sidebar">
+    <div class="sidebar__bg-item">
+      <div class="contacts-info contacts-info_sidebar">
+        <h3 class="contacts-info__title">Наши контакты</h3>
+        <div class="contacts-info__list">
+          <div class="contacts-info__item">
+            <div class="contacts-info__label">Металлоконструкции:</div>
+            <div class="contacts-info__content">
+              <div class="contacts-info__content-item"><%= @contact.metalware %></div>
+              <div class="contacts-info__content-item contacts-info__content-item_icon">
+                <a href=<%= contacts.telegram_link_for_metalware %> target="_blank">
+                  <img src="<%= asset_path 'contacts-info__telegram.svg' %>" alt="telegram">
+                </a>
+              </div>
+              <div class="contacts-info__content-item contacts-info__content-item_icon">
+                <a href=<%= contacts.whatsapp_link_for_metalware %> target="_blank">
+                  <img src="<%= asset_path 'contacts-info__whatsapp.svg' %>" alt="whatsapp">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="contacts-info__item">
+            <div class="contacts-info__label">Резка листа:</div>
+            <div class="contacts-info__content">
+              <div class="contacts-info__content-item"><%= contacts.cutting %></div>
+              <div class="contacts-info__content-item contacts-info__content-item_icon">
+                <a href=<%= contacts.telegram_link %> target="_blank">
+                  <img src="<%= asset_path 'contacts-info__telegram.svg' %>" alt="telegram">
+                </a>
+              </div>
+              <div class="contacts-info__content-item contacts-info__content-item_icon">
+                <a href=<%= contacts.whatsapp_link %> target="_blank">
+                  <img src="<%= asset_path 'contacts-info__whatsapp.svg' %>" alt="whatsapp">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar__bg-item">
+      <div class="shop-link shop-link_sidebar">
+        <div class="shop-link__inner">
+          <div class="shop-link__img">
+            <img src="<%= asset_path 'shop-link__car.png' %>" alt="slide-img" srcset="<% image_tag '/shop-link__car.png 1x, /shop-link__car@2x.png 2x' %>">
+          </div>
+          <div class="shop-link__content">
+            <h2 class="shop-link__title">Нашу продукцию Вы можете приобрести в сети торговых точек "Стройдвор"</h2>
+            <div class="shop-link__img shop-link__img_sidebar">
+              <img src="<%= asset_path 'shop-link__car.png' %>" alt="slide-img" srcset="<% image_tag '/shop-link__car.png 1x, /shop-link__car@2x.png 2x' %>">
+            </div>
+            <div class="shop-link__button">
+              <a class="button button_block button_color_blue button_size_extra-large button_style_solid button_style_rounded" href="http://stroydvor.kg/" target="_blank">Перейти в магазин</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

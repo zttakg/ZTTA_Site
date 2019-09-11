@@ -1,0 +1,482 @@
+<form class="form ordering-form__form" id="ordering-form__form" onsubmit="return validateForm()" method="post" action="/individual_orders/">
+  <div class="tabs tabs_style_default tabs_blue" data-tabs-name="individual-legal-form">
+    <span class="tabs__description visuallyhidden" data-tabs-description="data-tabs-description">Use left and right arrows to navigate between tabs.</span>
+    <div class="tabs__head">
+      <button class="tabs__tab tab-person-type" type="button"  value="individual" data-tab-id="individual">
+        <span class="tabs__title">Физическое лицо</span>
+      </button>
+      <button class="tabs__tab tab-person-type" type="button" value="legal" data-tab-id="legal">
+        <span class="tabs__title">Юридическое лицо</span>
+      </button>
+    </div>
+    <div class="tabs__body">
+      <div class="tabs__panel" data-panel-id="individual">
+        <div class="ordering-form__wrapper">
+          <h2 class="ordering-form__title">Данные покупателя</h2>
+          <div class="form-item form-item_inline form__item">
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="individual__last-name">Фамилия:
+                  <span>*</span>
+                </label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_text input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="individual__last-name" name="last_name" type="text" placeholder="Введите фамилию" value="<%= current_client.last_name %>">
+                </span>
+              </div>
+            </div>
+            <input name="authenticity_token" type="hidden" value="<%= session[:_csrf_token] %>">
+            <input id="person-type" name="person_type" type="hidden" value="">
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="last_name">Имя:
+                  <span>*</span>
+                </label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_text input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="individual__name" name="name" type="text" placeholder="Введите имя" value="<%= current_client.name %>">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-item form-item_inline form__item">
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="individual__phone">Номер телефона:
+                  <span>*</span>
+                </label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_tel input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="individual__phone" name="phone_number" type="tel" placeholder="+996 ___ ___ ___" value="<%= current_client.phone_number %>">
+                </span>
+              </div>
+            </div>
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="individual__email">Электронная почта:
+                  <span>*</span>
+                </label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_email input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="individual__email" name="email" type="email" placeholder="info@temirtulpar.com" value="<%= current_client.email %>">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-item form__item">
+            <div class="form-item__message">Данные нужны для доставки сообщений о статусе заказа.</div>
+          </div>
+        </div>
+      </div>
+      <div class="tabs__panel" data-panel-id="legal">
+        <div class="ordering-form__wrapper">
+          <h2 class="ordering-form__title">Реквизиты юридического лица</h2>
+          <div class="form-item form__item">
+            <div class="form-item__message">Указываются строго в соответствии с учредительными документами организации, которая является плательщиком и получателем заказа</div>
+          </div>
+          <div class="form-item form-item_inline form__item">
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="legal__org-name">Наименование организации:</label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_text input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="legal__org-name" name="company_name" type="text" value="<%= current_client.company_name %>">
+                </span>
+              </div>
+            </div>
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="legal__inn">ИНН:</label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_text input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="legal__inn" name="company_INN" type="text" value="<%= current_client.company_INN %>">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-item form__item">
+            <div class="form-item__label">
+              <label class="label" for="legal__legal-address">Юридический адрес:</label>
+            </div>
+            <div class="form-item__control">
+              <span class="input input_block input_type_text input_inline input_style_default">
+                <input class="form-control form-control_type_input input__control" id="legal__legal-address" name="company_legal_address" type="text" value="<%= current_client.company_legal_address %>">
+              </span>
+            </div>
+          </div>
+          <div class="form-item form__item">
+            <div class="form-item__label">
+              <label class="label" for="legal__real-address">Фактический адрес:</label>
+            </div>
+            <div class="form-item__control">
+              <span class="input input_block input_type_text input_inline input_style_default">
+                <input class="form-control form-control_type_input input__control" id="legal__real-address" name="company_address" type="text" value="<%= current_client.company_address %>">
+              </span>
+            </div>
+          </div>
+          <div class="form-item form-item_inline form__item">
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="legal__bank-name">Наименование банка:</label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_text input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="legal__bank-name" name="bank_name" type="text" value="<%= current_client.bank_name %>">
+                </span>
+              </div>
+            </div>
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="legal__checking-account">Расчетный счет:</label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_text input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="legal__checking-account" name="settlement_account" type="text" value="<%= current_client.settlement_account %>">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-item form-item_inline form__item">
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="legal__bik">БИК:</label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_text input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="legal__bik" name="company_BIC" type="text" value="<%= current_client.company_BIC %>">
+                </span>
+              </div>
+            </div>
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="legal__bank-city">Город банка:</label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_text input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="legal__bank-city" name="bank_address" type="text" value="<%= current_client.city %>">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-item form__item">
+            <div class="form-item__label">
+              <label class="label" for="legal__okpo-code">Код ОКПО:</label>
+            </div>
+            <div class="form-item__control">
+              <span class="input input_block input_type_text input_inline input_style_default">
+                <input class="form-control form-control_type_input input__control" id="legal__okpo-code" name="company_OKPO" type="text" value="<%= current_client.company_OKPO %>">
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ordering-form__wrapper">
+          <h2 class="ordering-form__title">Контактное лицо</h2>
+          <div class="form-item form-item_inline form__item">
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="individual__last-name">Фамилия:
+                  <span>*</span>
+                </label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_text input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="individual__last-name" name="contact_person_last_name" type="text" placeholder="Введите фамилию" value="<%= current_client.contact_person_last_name %>">
+                </span>
+              </div>
+            </div>
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="last_name">Имя:
+                  <span>*</span>
+                </label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_text input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="individual__name" name="contact_person_name" type="text" placeholder="Введите имя" value="<%= current_client.contact_person_name %>">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-item form-item_inline form__item">
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="individual__phone">Номер телефона:
+                  <span>*</span>
+                </label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_tel input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="individual__phone" name="contact_person_phone_number" type="tel" placeholder="+996 ___ ___ ___" value="<%= current_client.contact_person_phone_number %>">
+                </span>
+              </div>
+            </div>
+            <div class="form-item__col">
+              <div class="form-item__label">
+                <label class="label" for="individual__email">Электронная почта:
+                  <span>*</span>
+                </label>
+              </div>
+              <div class="form-item__control">
+                <span class="input input_block input_type_email input_inline input_style_default">
+                  <input class="form-control form-control_type_input input__control" id="individual__email" name="contact_person_email" type="email" placeholder="info@temirtulpar.com">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-item form__item">
+            <div class="form-item__message">Данные нужны для доставки сообщений о статусе заказа.</div>
+          </div>
+        </div>
+      </div>
+      <div class="tabs__preloader" data-tabs-preloader="data-tabs-preloader"></div>
+    </div>
+  </div>
+  <div class="tabs tabs_style_default tabs_blue" data-tabs-name="delivery-form">
+    <span class="tabs__description visuallyhidden" data-tabs-description="data-tabs-description">Use left and right arrows to navigate between tabs.</span>
+    <div class="tabs__head">
+      <button class="tabs__tab tab-delivery" type="button" data-tab-id="pickup" value="pick_up">
+        <span class="tabs__title">Самовывоз</span>
+      </button>
+      <button class="tabs__tab tab-delivery" type="button" data-tab-id="delivery" value="delivery">
+        <span class="tabs__title">Доставка</span>
+      </button>
+    </div>
+    <input id="delivery-method" name="delivery_method" type="hidden" value="">
+    <div class="tabs__body">
+      <div class="tabs__panel" data-panel-id="pickup">
+        <div class="ordering-form__wrapper">
+          <div class="pickup-info">
+            <div class="pickup-info__map">
+              <img src="<%= asset_path 'content/map@2x.jpg' %>" alt="map" style="width: 100%">
+            </div>
+            <div class="pickup-info__content">
+              <div class="pickup-info__item">Пункт выдачи заказов:</div>
+              <div class="pickup-info__item">г. Бишкек, пр. Чуй, 2А</div>
+              <div class="pickup-info__item">
+                <a href="https://www.google.ru/maps/place/Завод+%22Темир+Тулпар+Азия%22/@42.8740464,74.6620627,15z/data=!4m5!3m4!1s0x389eb7a63a7cedf3:0x23089a9809c34772!8m2!3d42.8701543!4d74.6617945">Показать на карте</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tabs__panel" data-panel-id="delivery">
+        <div class="ordering-form__wrapper">
+          <div class="form-item form__item">
+            <div class="form-item__label">
+              <label class="label" for="region-city">Регион, город</label>
+            </div>
+            <div class="form-item__control">
+              <span class="select select_style_default select_block">
+                <select class="form-control form-control_type_select select__control" id="region-city" name="city">
+                  <option class="select__placeholder">-- Выберите регион --</option>
+                  <% City.all.each do |city| %>
+                    <option value="<%= city.name %>"><%= city.name %></option>
+                  <% end %>
+                </select>
+              </span>
+            </div>
+          </div>
+          <div class="form-item form__item">
+            <div class="form-item__label">
+              <label class="label" for="delivery-address">Адрес доставки</label>
+            </div>
+            <div class="form-item__control">
+              <span class="input input_block input_type_text input_inline input_style_default">
+                <input class="form-control form-control_type_input input__control" id="delivery-address" name="delivery_address" type="text" placeholder="Точный адрес доставки (улица, дом)">
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tabs__preloader" data-tabs-preloader="data-tabs-preloader"></div>
+    </div>
+  </div>
+  <div class="ordering-form__inner">
+    <div class="ordering-form__wrapper">
+      <h2 class="ordering-form__title">Способ оплаты</h2>
+      <div class="payment-methods-list">
+        <div class="payment-methods-list__list">
+          <div class="payment-methods-list__item">
+            <div class="payment-method">
+              <input class="visuallyhidden payment-method__input" id="cash" name="payment" type="radio" value="cash" checked="checked" onclick="check_payment(false)" data-security-hide>
+              <label class="payment-method__inner" for="cash">
+                <div class="payment-method__image">
+                  <img src="<%= asset_path 'payment-method__cash.svg' %>" alt="cash">
+                </div>
+                <div class="payment-method__text">Оплата наличными</div>
+              </label>
+            </div>
+          </div>
+          <div class="payment-methods-list__item">
+            <div class="payment-method">
+              <input class="visuallyhidden payment-method__input" id="card" name="payment" type="radio" value="card" onclick="check_payment(true)" data-security-show>
+              <label class="payment-method__inner" for="card">
+                <div class="payment-method__image">
+                  <img src="<%= asset_path 'payment-method__cards.svg' %>" alt="card">
+                </div>
+                <div class="payment-method__text">Банковской картой</div>
+              </label>
+            </div>
+          </div>
+          <div class="payment-methods-list__item">
+            <div class="payment-method">
+              <input class="visuallyhidden payment-method__input" id="bank" name="payment" type="radio" value="bank" onclick="check_payment(false)" data-security-hide>
+              <label class="payment-method__inner" for="bank">
+                <div class="payment-method__image">
+                  <img src="<%= asset_path 'payment-method__bank.svg' %>" alt="bank">
+                </div>
+                <div class="payment-method__text">Банковский перевод</div>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="payment-methods-list__security" data-security-container>
+          <div class="payment-methods-list__security-inner">
+            <div class="payment-methods-list__payments-security">
+              <div class="payments-security payments-security_black">
+                <h3 class="payments-security__title">Безопасность платежей:</h3>
+                <div class="payments-security__logos">
+                  <div class="payments-security__item">
+                    <img src="<%= asset_path 'payments-security__uniteller.svg' %>" alt="uniteller">
+                  </div>
+                  <div class="payments-security__item">
+                    <img src="<%= asset_path 'payments-security__visa.svg' %>" alt="visa">
+                  </div>
+                  <div class="payments-security__item">
+                    <img src="<%= asset_path 'payments-security__optima.svg' %>" alt="optima">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="payment-methods-list__security-text">Мы гарантируем своим клиентам безопасную работу с данными их банковских карт.
+              <br>
+              <a href="<%= security_info_path %>" target="_blank">Гарантия безопасности</a> и
+              <a href="<%= payment_rules_path %>" target="_blank">Инструкция оплаты</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2 class="ordering-form__title">Комментарий к заказу</h2>
+    <div class="form-item">
+      <div class="form-item__label">
+        <label class="label" for="ordering-add-info">Дополнительная информация</label>
+      </div>
+      <div class="form-item__control">
+        <span class="textarea textarea_style_default textarea_block"><textarea class="form-control form-control_type_textarea textarea__control" id="ordering-add-info" name="comment" cols="30" rows="10" placeholder="Ваш комментарий"></textarea></span>
+      </div>
+    </div>
+    <input type="hidden" name="Shop_IDP" value="<%= ENV["SHOP_IDP"] %>">
+    <input type="hidden" name="Order_IDP" value="<%= @order_id %>">
+    <input type="hidden" name="Subtotal_P" value="<%= @items_sum_with_user_discount %>">
+    <input type="hidden" name="MeanType" value="1">
+    <input type="hidden" name="Signature" value="<%= @signature %>">
+    <input type="hidden" name="Currency" value="KGS">
+    <input type="hidden" name="URL_RETURN" value="<%= ENV["URL_RETURN"] %>">
+    <div class="ordering-form__controls">
+      <button onclick="f(this.form)" class="button button_color_green button_size_large button_style_solid button_style_rounded button_style_uppercase button_style_letter-spacing" type="submit">Подтвердить заказ</button>
+    </div>
+  </div>
+</form>
+
+<script>
+  $(document).ready(function(){
+    document.getElementById("person-type").value = $('.tab-person-type[aria-selected="true"]').val()
+    document.getElementById("delivery-method").value = $('.tab-delivery[aria-selected="true"]').val()
+  });
+
+  $('.tab-person-type').on("click", function() {
+    document.getElementById("person-type").value = $('.tab-person-type[aria-selected="true"]').val()
+  });
+
+  $('.tab-delivery').on("click", function() {
+    document.getElementById("delivery-method").value = $('.tab-delivery[aria-selected="true"]').val()
+  });
+
+  $(document).ready(function(){
+    document.getElementById("person-type").value = $('.tab-person-type[aria-selected="true"]').val()
+    document.getElementById("delivery-method").value = $('.tab-delivery[aria-selected="true"]').val()
+  });
+
+  $('.tab-person-type').on("click", function() {
+    document.getElementById("person-type").value = $('.tab-person-type[aria-selected="true"]').val()
+  });
+
+  $('.tab-delivery').on("click", function() {
+    document.getElementById("delivery-method").value = $('.tab-delivery[aria-selected="true"]').val()
+  });
+
+  var payment;
+
+  function check_payment(value) {
+    payment =  value;
+  }
+
+  function f(form){
+    if (payment) {
+      var data = $(form).serializeArray();
+      $("#ordering-form__form").attr('action', 'https://wpay.uniteller.ru/pay/');
+
+      $.ajax({
+        type: "POST",
+        url: '/individual_orders/',
+        data: data
+      });
+    }
+  }
+
+  function validateForm() {
+    var type = document.getElementById("person-type").value;
+
+    if (type === "individual") {
+      var name = $("input[name=name]").val();
+      var last_name = $("input[name=last_name]").val();
+      var email = $("input[name=email]").val();
+      var phone_number = $("input[name=phone_number]").val();
+    } else if (type === "legal") {
+      var name = $("input[name=contact_person_name]").val();
+      var last_name = $("input[name=contact_person_last_name]").val();
+      var email = $("input[name=contact_person_email]").val();
+      var phone_number = $("input[name=contact_person_phone_number]").val();
+    } else {
+      showErrorNotification("Заполните данные покупателя");
+      return false
+    }
+
+    if (isInputEmpty(name) || isInputEmpty(last_name) || isInputEmpty(email) || isInputEmpty(phone_number)) {
+      showErrorNotification("Заполните данные покупателя");
+      return false;
+    }
+
+    var emailRegexp = /([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})/;
+    if(!emailRegexp.test(email)) {
+      showErrorNotification("Неверный формат электронной почты");
+      return false;
+    }
+
+    var phoneNumberRegexp = /\d{8,9}/;
+    var sanitizedPhoneNumber = phone_number.replace(/\D+/g, '').replace(/(996|0)/, '')
+    if(!phoneNumberRegexp.test(sanitizedPhoneNumber)) {
+      showErrorNotification("Неверный формат номера телефона");
+      return false;
+    }
+  }
+
+  function isInputEmpty(field) {
+    return field == null || field == "";
+  }
+
+  function showErrorNotification (msg) {
+    const notificationBoard = new App.Notification({
+      delay: 10000
+    });
+
+    notificationBoard.show(msg, {className: "notification_type_warning"});
+  }
+</script>

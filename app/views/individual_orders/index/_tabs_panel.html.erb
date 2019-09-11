@@ -1,0 +1,11 @@
+<% collection_orders = filter_by_status(@orders, status) %>
+
+<% if collection_orders.present? %>
+  <%= render partial: "individual_orders/index/filter", locals: { orders:  collection_orders, status: status  } %>
+
+  <div id="<%= status %>">
+    <%= render partial: "individual_orders/index/list", locals: { status: status, orders: collection_orders } %>
+  </div>
+<% else %>
+  <%= render partial: "individual_orders/index/empty_tab" %>
+<% end %>

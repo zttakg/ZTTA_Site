@@ -1,0 +1,15 @@
+<div class="order-delivery-info__right">
+  <div class="orders-history">
+    <div class="orders-history__head">
+      <h3 class="orders-history__title">История заказа:</h3>
+    </div>
+    <div class="orders-history__list">
+      <% order_histories.each do |order_history| %>
+        <div class="orders-history__item">
+          <div class="orders-history__item-left"><%= order_history.created_at.strftime('%d.%m.%Y %H:%M') %></div>
+          <div class="orders-history__item-right"><%= humanize_order_status(order_history.status_to) %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

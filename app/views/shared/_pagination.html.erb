@@ -1,0 +1,47 @@
+<% if collection.total_pages > 1 %>
+    <% if params[:page].to_i - 1 > 0 %>
+        <div class="pagination__controls pagination__controls_backward">
+          <a class="pagination__control" href="<%= url_constructor(url, collection.current_page - 1) %>">
+            <svg class="icon icon_arrow-left" role="img">
+              <title>arrow-left</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-left' %>"></use>
+            </svg>
+          </a>
+        </div>
+    <% end %>
+
+    <div class="pagination__controls">
+      <% collection.total_pages.times do |count| %>
+          <% page = count + 1 %>
+          <% path = url_constructor(url, page) %>
+
+          <% case page %>
+      <% when collection.current_page %>
+              <span class="pagination__page pagination__page_current"><%= page %></span>
+          <% when 1 %>
+              <a class="pagination__page" href="<%= path %>" data-remote="true"><%= page %></a>
+              <% if collection.current_page - 2 > 1 %>
+                  <span class="pagination__ellipsis">…</span>
+              <% end %>
+          <% when collection.total_pages %>
+              <% if collection.current_page + 2 < collection.total_pages %>
+                  <span class="pagination__ellipsis">…</span>
+              <% end %>
+              <a class="pagination__page" href="<%= path %>" data-remote="true"><%= page %></a>
+          <% when (collection.current_page - 1)..(collection.current_page + 1) %>
+              <a class="pagination__page" href="<%= path %>" data-remote="true"><%= page %></a>
+          <% end %>
+      <% end %>
+    </div>
+
+    <% if params[:page].to_i < collection.total_pages && collection.total_pages > 1 %>
+        <div class="pagination__controls pagination__controls_forward">
+          <a class="pagination__control" href="<%= url_constructor(url, collection.current_page + 1) %>">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>arrow-right</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </a>
+        </div>
+    <% end %>
+<% end %>

@@ -1,0 +1,59 @@
+<div class="top-filter">
+  <div class="top-filter__left">
+    <div class="top-filter__quantity">Всего заказов:
+      <span><%= @orders.size %></span>
+    </div>
+    <div class="top-filter__select">
+      <div class="form-item">
+        <div class="form-item__label visuallyhidden">
+          <label class="label" for="item-form">Заказы за время</label>
+        </div>
+        <div class="form-item__control">
+          <span class="select select_style_default select_block">
+            <select class="form-control form-control_type_select select__control" id="item-form_<%= status %>" name="item-form">
+              <option value="one">за 1 месяц</option>
+              <option value="three">за 3 месяца</option>
+              <option value="six">за 6 месяцев</option>
+            </select>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="top-filter__right">
+    <div class="search-widget">
+      <form action="#">
+        <input class="search-widget__input" type="text" id="search_<%= status%>" placeholder="Поиск заказов по ID">
+        <button class="button search-widget__submit" type="submit">
+          <svg class="icon icon_magnifier" role="img">
+            <title>magnifier</title>
+            <use xlink:href="<%= asset_path 'icons.svg#magnifier' %>"></use>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+  $('#item-form_<%= status %>').change(function(e) {
+    var params = $(this).val();
+
+    $(document).ready(function(){
+      $.get('/individual_orders/filter?value=' + params + '&status=' + '<%= status %>',{},function(response){
+        return response;
+      })
+    });
+  });
+
+  $(document).ready(function(){
+    $("#search_<%= status %>").keyup(function(){
+        var query = (this.value.length > 0) ? this.value : "*";
+        var url = '/individual_orders/search?query=';
+      status = '&status=' + "<%= status %>";
+
+      $.get(url.concat(query, status), {}, function(response){ return response })
+    });
+  });
+</script>

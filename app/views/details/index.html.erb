@@ -1,0 +1,109 @@
+<div class="page__top">
+  <div class="page__inner">
+    <div class="bread-crumbs">
+      <ul class="bread-crumbs__list">
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= root_path %>">Главная</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">
+          <a class="bread-crumbs__link" href="<%= cabinet_path %>">Личный кабинет</a>
+          <div class="bread-crumbs__separator">
+            <svg class="icon icon_arrow-right" role="img">
+              <title>separator</title>
+              <use xlink:href="<%= asset_path 'icons.svg#arrow-right' %>"></use>
+            </svg>
+          </div>
+        </li>
+        <li class="bread-crumbs__item">Мои детали</li>
+      </ul>
+    </div>
+    <h1 class="page-title">Мои детали</h1>
+  </div>
+</div>
+<div class="page__main">
+  <div class="page__inner">
+    <% if @details.present? %>
+      <div class="top-filter">
+        <div class="top-filter__left">
+          <div class="top-filter__quantity">Всего деталей:
+            <span class="items-count"><%= @details_count %></span>
+          </div>
+          <div class="top-filter__select">
+            <div class="form-item">
+              <div class="form-item__label visuallyhidden">
+                <label class="label" for="item-form">Детали:</label>
+              </div>
+              <div class="form-item__control">
+                <span class="select select_style_default select_block">
+                  <select class="form-control form-control_type_select select__control" id="item-form" name="item-form">
+                    <option value="all">Все детали</option>
+                    <option value="rectangle">Квадратные детали</option>
+                    <option value="circle">Круглые детали</option>
+                    <option value="triangle">Треугольные детали</option>
+                  </select>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="top-filter__right">
+          <div class="search-widget">
+            <form action="#">
+              <input class="search-widget__input" type="text" placeholder="Поиск деталей" id="search">
+              <button class="button search-widget__submit" type="submit">
+                <svg class="icon icon_magnifier" role="img">
+                  <title>magnifier</title>
+                  <use xlink:href="<%= asset_path 'icons.svg#magnifier' %>"></use>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="detail-cards-list">
+        <%= render partial: @details %>
+      </div>
+    <% else %>
+      <%= render partial: 'empty' %>
+    <% end %>
+    <div class="pagination">
+      <%= render partial: 'shared/pagination', locals: { url: details_path, collection: @details } %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("#search").keyup(function(){
+      value = this.value
+
+      $.ajax({
+        url: "/details/search",
+        type: "get",
+        data: {query: value}
+      });
+    });
+  });
+
+  $('#item-form').change(function(e) {
+    var value = $(this).val();
+
+    $(document).ready(function(){
+      $.ajax({
+        url: "/details/filter",
+        type: "get",
+        data: {filter: value},
+        success: function (data) {
+            App.Accordion(".detail-card-item");
+        }
+      })
+      ;
+    });
+  });
+</script>

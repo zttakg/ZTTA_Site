@@ -1,0 +1,51 @@
+<div class="page__sidebar">
+  <div class="sidebar">
+    <div class="sidebar__item">
+      <div class="profile-menu">
+        <div class="profile-menu__head">
+          <div class="profile-menu__username"><%= current_client.last_name %> <%= current_client.name %></div>
+          <a class="profile-menu__email"><%= current_client.email %></a>
+        </div>
+        <div class="profile-menu__inner">
+          <%= link_to "Настройки профиля", edit_client_registration_path, class: "profile-menu__item" %>
+          <%= link_to "Мои детали", details_path, class: "profile-menu__item" %>
+          <%= link_to "Моя корзина", cart_index_path, class: "profile-menu__item" %>
+          <%= link_to "Мои заказы", individual_orders_path, class: "profile-menu__item" %>
+          <%= link_to "Выйти", destroy_client_session_path, method: :delete, class: "profile-menu__item" %>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar__item">
+      <div class="image-links image-links_column">
+        <div class="image-links__item">
+          <div class="image-link-item image-link-item_calc image-link-item_small">
+            <a class="image-link-item__mask" href="/constructor"></a>
+            <div class="image-link-item__left">
+              <svg class="icon icon_calculator" role="img">
+                <title>icon</title>
+                <use xlink:href="<%= asset_path 'icons.svg#calculator' %>"></use>
+              </svg>
+            </div>
+            <div class="image-link-item__right">
+              <h3 class="image-link-item__title">Конструктор деталей</h3>
+            </div>
+          </div>
+        </div>
+        <div class="image-links__item">
+          <div class="image-link-item image-link-item_upload image-link-item_small">
+            <a class="image-link-item__mask" href="/constructor/attachment"></a>
+            <div class="image-link-item__left">
+              <svg class="icon icon_upload" role="img">
+                <title>icon</title>
+                <use xlink:href="<%= asset_path 'icons.svg#upload' %>"></use>
+              </svg>
+            </div>
+            <div class="image-link-item__right">
+              <h3 class="image-link-item__title">Загрузить чертеж детали</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
