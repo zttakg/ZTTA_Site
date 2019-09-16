@@ -12,12 +12,12 @@ module DetailSVG
         round(args[:r])
       end
 
-      def area
+      def netto_area
         round(Math::PI * radius**2)
       end
 
       # area with remains
-      def raw_area
+      def area
         round((radius * 2)**2)
       end
 

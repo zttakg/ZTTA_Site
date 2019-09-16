@@ -15,8 +15,12 @@ module DetailSVG
     end
 
     # was: round(body_area - holes_area).ceil
-    def area
+    def _area
       round(body_area).ceil
+    end
+
+    def area
+      round(body_area - holes_area).ceil
     end
 
     def perimeter

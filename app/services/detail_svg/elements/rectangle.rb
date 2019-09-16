@@ -20,9 +20,14 @@ module DetailSVG
         round(args[:rx])
       end
 
-      def area
+      def netto_area
         rectangle_area = width * height
         rectangle_area -= corners_area if corner_radius.positive?
+        round(rectangle_area)
+      end
+
+      def area
+        rectangle_area = width * height
         round(rectangle_area)
       end
 

@@ -18,6 +18,7 @@ module DetailSVG
         @edges << DetailSVG::Geometry::Edge.new(@vertices.last, @vertices.first) unless @vertices.last == @vertices.first
       end
 
+
       def area
         sum = 0
         (0..vertices.length - 1).each do |i|

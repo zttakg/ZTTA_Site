@@ -13,10 +13,7 @@ module Details
 
     def calculation
       (
-        details_count * detail_cost +
-        overhead_cost * margin * cutting_preparation_time +
-        material_preparation +
-        programming_const
+        details_count * detail_cost + overhead_cost * margin * cutting_preparation_time + material_preparation + programming_const
       ).ceil
     end
 
@@ -37,7 +34,8 @@ module Details
     def detail_cost
       detail_material +
       detail_cutting * (cut.consumable_cost + cut_material.consumption) +
-      detail[:holes_count] * cut_material.pierce_price
+      (detail[:holes_count] + 1) * cut_material.pierce_price
+      # Added: +1 to detail[:holes_count] for initial cut
     end
 
     # return KGS
