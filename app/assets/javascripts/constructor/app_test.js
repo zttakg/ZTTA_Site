@@ -496,7 +496,10 @@ webpackJsonp([1], {
                     e = t.$createElement,
                     i = t._self._c || e;
                 return i("span", {
-                    class: t.classes
+                    class: t.classes,
+                    attrs: {
+                        style: "width: 268px"
+                    }
                 }, [t.icon ? i("span", {
                     class: t.baseClassName + "__icon"
                 }, [i("Icon", {
