@@ -62,11 +62,11 @@
               <div class="form-item form-item_inline form__item">
                 <div class="form-item__col">
                   <div class="form-item__label">
-                    <%= f.label :phone_number, class: "label" %>
+                    <%= f.label :phone_number, 'Номер телефона:<span>*</span>'.html_safe, class: "label" %>
                   </div>
                   <div class="form-item__control">
                     <span class="input input_block input_type_tel input_inline input_style_default">
-                      <%= f.text_field :phone_number, class: "form-control form-control_type_input input__control", id: "phone", type: "tel" %>
+                      <%= f.text_field :phone_number, class: "form-control form-control_type_input input__control", id: "phone", type: "tel", required: true %>
                     </span>
                   </div>
                 </div>
@@ -197,14 +197,14 @@
                     <legend class="fieldset__legend">Получать смс – уведомления?</legend>
                     <div class="fieldset__item">
                       <label class="radio radio_style_default" for="form-demo__radio-2">
-                        <input class="form-control form-control_type_radio radio__control" id="form-demo__radio-2" name="form-demo__radio-group-2" type="radio">
+                        <input class="form-control form-control_type_radio radio__control" id="form-demo__radio-2" name="form-demo__radio-group-2" type="radio" checked="checked">
                         <span class="radio__box"></span>
                         <span class="radio__label">Да</span>
                       </label>
                     </div>
                     <div class="fieldset__item">
                       <label class="radio radio_style_default" for="form-demo__radio-2">
-                        <input class="form-control form-control_type_radio radio__control" id="form-demo__radio-2" name="form-demo__radio-group-2" type="radio" checked="checked">
+                        <input class="form-control form-control_type_radio radio__control" id="form-demo__radio-2" name="form-demo__radio-group-2" type="radio">
                         <span class="radio__box"></span>
                         <span class="radio__label">Нет</span>
                       </label>

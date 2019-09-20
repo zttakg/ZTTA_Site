@@ -2258,36 +2258,49 @@ webpackJsonp([1], {
                     staticClass: "results-table__item"
                 }, [t._m(0), t._v(" "), i("div", {
                     staticClass: "results-table__text"
-                }, [i("span", [t._v(t._s(t._f("currency")(t.data.price)) + " сом")])])]), t._v(" "), i("div", {
+                }, [i("span", [t._v(t._s(t._f("currency")(t.data.price)) + " сом")])])]), t._v(" "),
+
+
+                    i("div", {
+                        staticClass: "results-table__item"
+                    }, [i("div", {
+                        staticClass: "results-table__label"
+                    }, [i("span", [t._v("Стоимость за шт.")]), t._v(" "), i("Button", {
+                        directives: [{
+                            name: "click-outside",
+                            rawName: "v-click-outside",
+                            value: t.tooltipHide,
+                            expression: "tooltipHide"
+                        }],
+                        staticClass: "results-table__tip",
+                        attrs: {
+                            "data-tooltip-id": "tip",
+                            "data-tooltip-placement": "top"
+                        },
+                        on: {
+                            click: t.tooltipShow
+                        }
+                    }, [i("Icon", {
+                        attrs: {
+                            name: "question-tooltip"
+                        }
+                    })], 1), t._v(" "), i("Tooltip", {
+                        style: "\n              top: -43px;\n              left: 356px;\n            ",
+                        attrs: {
+                            open: t.isTooltipOpen,
+                            "x-placement": "top"
+                        }
+                    }, [t._v("\n            Стоимость зависит от количества деталей.\n            Больше деталей - меньше стоимость.\n          ")])], 1), t._v(" "), i("div", {
+                        staticClass: "results-table__text"
+                    }, [i("span", [t._v("\n            " + t._s(t._f("currency")(t.data.price / t.data.count)) + " сом\n          ")])])]),
+
+
+
+                    i("div", {
                     staticClass: "results-table__item"
                 }, [i("div", {
                     staticClass: "results-table__label"
-                }, [i("span", [t._v("Изготовление")]), t._v(" "), i("Button", {
-                    directives: [{
-                        name: "click-outside",
-                        rawName: "v-click-outside",
-                        value: t.tooltipHide,
-                        expression: "tooltipHide"
-                    }],
-                    staticClass: "results-table__tip",
-                    attrs: {
-                        "data-tooltip-id": "tip",
-                        "data-tooltip-placement": "top"
-                    },
-                    on: {
-                        click: t.tooltipShow
-                    }
-                }, [i("Icon", {
-                    attrs: {
-                        name: "question-tooltip"
-                    }
-                })], 1), t._v(" "), i("Tooltip", {
-                    style: "\n              top: -43px;\n              left: 356px;\n            ",
-                    attrs: {
-                        open: t.isTooltipOpen,
-                        "x-placement": "top"
-                    }
-                }, [t._v("\n            В рассчет срока изготовления заказа влючаются только календарные\n            рабочие дни.\n          ")])], 1), t._v(" "), i("div", {
+                }, [i("span", [t._v("Изготовление")]), t._v(" "), t._v(" ")], 1), t._v(" "), i("div", {
                     staticClass: "results-table__text"
                 }, [i("span", [t._v("\n            " + t._s(t._f("pluralize")(t.data.createDays, "день", "дня", "дней")) + "\n          ")])])]), t._v(" "), i("div", {
                     staticClass: "results-table__item ta-right"
