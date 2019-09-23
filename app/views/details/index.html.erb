@@ -52,19 +52,6 @@
             </div>
           </div>
         </div>
-        <div class="top-filter__right">
-          <div class="search-widget">
-            <form action="#">
-              <input class="search-widget__input" type="text" placeholder="Поиск деталей" id="search">
-              <button class="button search-widget__submit" type="submit">
-                <svg class="icon icon_magnifier" role="img">
-                  <title>magnifier</title>
-                  <use xlink:href="<%= asset_path 'icons.svg#magnifier' %>"></use>
-                </svg>
-              </button>
-            </form>
-          </div>
-        </div>
       </div>
       <div class="detail-cards-list">
         <%= render partial: @details %>
@@ -78,6 +65,7 @@
   </div>
 </div>
 
+<script src="jquery.min.js"></script>
 <script>
   $(document).ready(function(){
     $("#search").keyup(function(){
@@ -102,8 +90,7 @@
         success: function (data) {
             App.Accordion(".detail-card-item");
         }
-      })
-      ;
+      });
     });
   });
 </script>

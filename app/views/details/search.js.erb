@@ -1,4 +1,4 @@
 $(".detail-cards-list").html("<%= escape_javascript(render partial: @details) %>");
 $(".pagination").html("<%= escape_javascript(render partial: 'shared/pagination', locals: { url: details_path, collection: @details }) %>");
-$('.items-count').html("<%= @details_count%>");
+$('.items-count').html("<%= @details_count %>");
 App.Accordion(".detail-card-item");

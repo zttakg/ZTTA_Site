@@ -45,6 +45,9 @@
           <button class="tabs__tab" type="button" data-tab-id="canceled">
             <span class="tabs__title">Отмененные заказы</span>
           </button>
+          <button class="tabs__tab" type="button" data-tab-id="pending_payment">
+            <span class="tabs__title">Ожидают оплаты</span>
+          </button>
         </div>
         <div class="tabs__body">
             <div class="tabs__panel" data-panel-id="all">
@@ -59,6 +62,9 @@
             <div class="tabs__panel" data-panel-id="canceled">
               <%= render partial: "individual_orders/index/tabs_panel", locals: { status: "canceled" } %>
             </div>
+          <div class="tabs__panel" data-panel-id="pending_payment">
+            <%= render partial: "individual_orders/index/tabs_panel", locals: { status: "pending_payment" } %>
+          </div>
           <div class="tabs__preloader" data-tabs-preloader="data-tabs-preloader"></div>
         </div>
       </div>

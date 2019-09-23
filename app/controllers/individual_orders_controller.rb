@@ -101,8 +101,10 @@ class IndividualOrdersController < ApplicationController
       Date.current - 1.month
     when 'three'
       Date.current - 3.month
-    else
+    when 'six'
       Date.current - 6.month
+    else
+      Date.current - 12.month
     end
   end
 
